@@ -1,0 +1,39 @@
+using NodeEditorFramework;
+using NodeEditorFramework.Utilities;
+using UnityEngine;
+
+[Node (false, "OneInput/Step")]
+public class Texture1Step : TextureMathOp
+{
+    public const string ID = "Texture1Step";
+    public override string GetID { get { return ID; } }
+
+    public override Node Create (Vector2 pos) 
+    {
+
+        Texture1Step node = CreateInstance<Texture1Step> ();
+        
+        node.rect = new Rect(pos.x, pos.y, m_NodeWidth, m_NodeHeight);
+        node.name = "Step";
+        node.CreateInputOutputs();
+        node.m_OpType=MathOp.Step;
+        node.m_Value1 = new FloatRemap(0.8f, 0, 1);
+        node.m_Value2 = new FloatRemap(0.8f, 0, 1);
+        node.m_Value3 = new FloatRemap(0.8f, 0, 1);
+        return node;
+    }
+    public override void DrawNodePropertyEditor()
+    {
+        base.DrawNodePropertyEditor();
+        m_Value1.SliderLabel(this,"Red");//,new GUIContent("Red", "Float"), m_R);
+        if (m_TexMode == TexMode.ColorRGB)
+        {
+            m_Value2.SliderLabel(this,"Green"); //,new GUIContent("Red", "Float"), m_R);
+            m_Value3.SliderLabel(this,"Blue"); //,new GUIContent("Red", "Float"), m_R);
+        }
+
+
+
+    }
+
+}
