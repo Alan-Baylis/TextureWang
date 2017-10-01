@@ -1,7 +1,11 @@
 # TextureWang
 Node based procedural texture generator for unity.
 
-While the source is public, the code istelf is not open source.
+Work in progress.
+
+Uses a somewhat modified copy of https://github.com/Seneral/Node_Editor_Framework  taken about July 2016
+
+Note, while the source is public, the code istelf is not open source.
 
 Its simply my intent to stop others from being able to package up this code or derivative and sell it on the Unity Asset Store or any other store.
 
