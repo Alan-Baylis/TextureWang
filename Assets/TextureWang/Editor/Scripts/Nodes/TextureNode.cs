@@ -11,7 +11,10 @@ using UnityEditor;
 
 public abstract class TextureNode : Node
 {
-    public EditorWindow m_Refresh;
+    private const string  m_Help = "";
+    public virtual string GetHelp() { return m_Help; }
+
+    private List<EditorWindow> m_Refresh;
     protected int m_NodeWidth = 128;
     protected int m_NodeHeight = 142;
 
@@ -35,7 +38,22 @@ public abstract class TextureNode : Node
     public FloatRemap m_ScalePreview = new FloatRemap(1.0f);
     private bool m_ShowLevels;
 
+    public void AddRefreshWindow(EditorWindow _w)
+    {
+        if (m_Refresh == null)
+            m_Refresh=new List<EditorWindow>();
 
+        if (!m_Refresh.Contains(_w))
+            m_Refresh.Add(_w);
+    }
+    public void RemoveRefreshWindow(EditorWindow _w)
+    {
+        if (m_Refresh != null)
+        {
+            if (m_Refresh.Contains(_w))
+                m_Refresh.Remove(_w);
+        }
+    }
     protected internal override void CopyScriptableObjects(System.Func<ScriptableObject, ScriptableObject> replaceSerializableObject)
     {
         // Get the fields of the specified class.
@@ -189,31 +207,27 @@ public abstract class TextureNode : Node
     public override void DrawNodePropertyEditor()
     {
         //GUI.changed = false;
-        //        GUILayout.BeginVertical();
-        //   m_TexMode = RTEditorGUI.EnumPopup(m_TexMode);
         m_TexMode = (TexMode)UnityEditor.EditorGUILayout.EnumPopup(new GUIContent("Colors", "3 components per texture or one"), m_TexMode, GUILayout.MaxWidth(300));
-        //        GUILayout.Label(" Width: "+m_TexWidth+" Height: "+m_TexHeight);
 
 
         EditorGUILayout.LabelField("TexWidth");
         m_TexWidth=(int)EditorGUILayout.Slider(m_TexWidth, 1.0f, 2048.0f);
         EditorGUILayout.LabelField("TexHeight");
         m_TexHeight = (int)EditorGUILayout.Slider(m_TexHeight, 1.0f, 2048.0f);
-
-
-//        m_TexWidth = (int)RTEditorGUI.SliderLabel( "TexWidth", m_TexWidth, 1f, 2048.0f);
-//        m_TexHeight = (int)RTEditorGUI.SliderLabel("TexHeight", m_TexHeight, 1f, 2048.0f);
-
+        EditorGUILayout.TextArea("Info: "+GetHelp());
+        
         if (m_Param!=null)
             GUILayout.Label("outParam: Width: " + m_Param.m_Width + "outParam: Height: " + m_Param.m_Height);
+
         if (m_Param != null && m_Param.m_Destination!=null)
             GUILayout.Label("HWDest: Width: " + m_Param.m_Destination.width + "HWDest: Height: " + m_Param.m_Destination.height+" fmt:"+ m_Param.m_Destination.format, EditorStyles.wordWrappedLabel);
+
         m_Saturate = GUILayout.Toggle(m_Saturate, "Clip result to 0..1");
         m_ClampInputUV = GUILayout.Toggle(m_ClampInputUV, "Clamp Input UV");
         m_InvertInput = GUILayout.Toggle(m_InvertInput, "Invert Input");
         m_InvertOutput = GUILayout.Toggle(m_InvertOutput, "Invert Output");
 
-        //        m_ScalePreview.SliderLabel(this,"Scale Preview")  ;
+        
         m_ShowLevels = EditorGUILayout.Foldout(m_ShowLevels, "Levels:");
         if (m_ShowLevels)
         {
@@ -223,10 +237,7 @@ public abstract class TextureNode : Node
             m_OutputGamma.SliderLabel(this, "Scale Output Gamma");
             m_OutputMax.SliderLabel(this, "Scale Output Out Max");
         }
-        //        if (m_Cached != null)
-                                                            //            GUILayout.Label(m_Cached);
 
-        //      GUILayout.EndVertical();
         EditorGUILayout.Space();
         RTEditorGUI.Seperator();
 
@@ -310,8 +321,14 @@ public abstract class TextureNode : Node
     public void CreateCachedTextureIcon()
     {
         m_Cached = CreateTextureIcon(1024);
-        if(m_Refresh)
-            m_Refresh.Repaint();
+        if (m_Refresh != null)
+        {
+            foreach (var w in m_Refresh)
+            {
+                if(w!=null)
+                    w.Repaint();
+            }
+        }
     }
     
 

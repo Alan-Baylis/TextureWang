@@ -877,8 +877,8 @@ namespace NodeEditorFramework
 					ContextCallback (new NodeEditorMenuCallback (curEditorState.focusedNode.GetID, curNodeCanvas, curEditorState));
 					Node duplicatedNode = curNodeCanvas.nodes [curNodeCanvas.nodes.Count-1];
 				    duplicatedNode.rect = curEditorState.focusedNode.rect;
-				    duplicatedNode.rect.x += 10;
-                    duplicatedNode.rect.y += 10;
+				    duplicatedNode.rect.x += 50;
+                    duplicatedNode.rect.y += 50;
 
                         curEditorState.focusedNode = duplicatedNode;
 					curEditorState.dragNode = true;

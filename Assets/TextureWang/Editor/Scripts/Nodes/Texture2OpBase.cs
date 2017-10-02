@@ -28,7 +28,7 @@ public abstract class Texture2OpBase : TextureNode
         mat.SetInt("_TextureBIsGrey", _inputB.IsGrey() ? 1 : 0);
         mat.SetTexture("_GradientTex", _inputB.GetHWSourceTexture());
         mat.SetVector("_TexSizeRecip", new Vector4(1.0f / (float)_inputB.m_Width, 1.0f / (float)_inputB.m_Height, m_Value, 0));
-
+        SetCommonVars(mat);
         //Texture2D tex = input.CreateTexture(TextureParam.ms_TexFormat);
 
         //input.FillInTexture(tex);

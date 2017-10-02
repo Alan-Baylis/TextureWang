@@ -5,6 +5,8 @@ using UnityEngine;
 [Node (false, "OneInput/Smooth")]
 public class Texture1Smooth : TextureMathOp
 {
+    private const string m_Help = "Gauss Blur/Smooth Source Dist is number of pixels to use for smooth filter";
+    public override string GetHelp() {  return m_Help;  }
     public const string ID = "Texture1Smooth";
     public override string GetID { get { return ID; } }
 
@@ -17,6 +19,7 @@ public class Texture1Smooth : TextureMathOp
         node.name = "Smooth";
         node.CreateInputOutputs();
         node.m_OpType=MathOp.Smooth;
+        node.m_Value1=new FloatRemap(2.0f,0,20);
         return node;
     }
     public override void DrawNodePropertyEditor()

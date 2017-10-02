@@ -314,7 +314,7 @@ Shader "Hidden/TextureOps" {
 
 	float4 fragSobel(v2f i) : SV_Target
 	{
-		float2 delta = _TexSizeRecip.xy;
+		float2 delta = _TexSizeRecip.xy*_Multiply.x;
 
 		float4 hr = float4(0, 0, 0, 0);
 		float4 vt = float4(0, 0, 0, 0); 

@@ -20,18 +20,9 @@ public class NodeInspectorWindow : EditorWindow
  
     public static NodeInspectorWindow Init(NodeEditorWindow _src)
     {
-        /*
-                    if (m_Source != null)
-                        m_Source.m_Refresh = null;
-        */
+
         NodeInspectorWindow window = GetWindow<NodeInspectorWindow>();
 
-        //window = CreateInstance<NodeInspectorWindow>();
-        //GetWindow<PreviewTextureWindow>();//ScriptableObject.CreateInstance<PreviewTextureWindow>();
-
-
-        //            window.m_Preview = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
-        //window.position = new Rect(_inst.canvasWindowRect.x+ _inst.canvasWindowRect.width*0.5f, _inst.canvasWindowRect.y + _inst.canvasWindowRect.height * 0.5f, 350, 250);
         window.m_Source = _src;
         if (_src == null)
             Debug.LogError("init Node Inspector Window with null source");

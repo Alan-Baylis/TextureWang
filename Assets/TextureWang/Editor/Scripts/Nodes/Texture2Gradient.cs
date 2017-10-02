@@ -8,6 +8,8 @@ public class Texture2Gradient : Texture2OpBase
     public const string ID = "Texture2Gradient";
 	public override string GetID { get { return ID; } }
 
+    private const string m_Help = "Use the brightness of each pixel in TextureIndex to look up a texture \nin 1DGradient, the brightness (0 to 1) is used as a horizontal\n lookup ( u in uv tex co ord)";
+    public override string GetHelp() { return m_Help; }
 
 
     public override Node Create (Vector2 pos) 

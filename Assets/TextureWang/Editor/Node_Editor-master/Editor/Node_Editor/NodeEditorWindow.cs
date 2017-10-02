@@ -365,8 +365,10 @@ namespace NodeEditorFramework
             }
             return n;
         }
-        public void DrawSideWindow () 
-		{
+        public void DrawSideWindow ()
+        {
+            if (mainNodeCanvas == null)
+                return;
 			GUILayout.Label (new GUIContent ("TextureWang (" + mainNodeCanvas.name + ")", "Opened Canvas path: " + openedCanvasPath), NodeEditorGUI.nodeLabelBold);
 
 			if (GUILayout.Button (new GUIContent ("Save Canvas", "Saves the Canvas to a Canvas Save File in the Assets Folder")))

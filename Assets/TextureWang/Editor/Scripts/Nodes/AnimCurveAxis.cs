@@ -10,8 +10,8 @@ public class AnimCurveAxis : CreateOp
 
     public AnimationCurve m_RemapCurve=new AnimationCurve();
     public AnimationCurve m_RemapCurveY = new AnimationCurve();
-    public FloatRemap m_RepeatX= new FloatRemap(1.0f);
-    public FloatRemap m_RepeatY = new FloatRemap(1.0f);
+    public FloatRemap m_RepeatX= new FloatRemap(1.0f,0,10);
+    public FloatRemap m_RepeatY = new FloatRemap(1.0f,0,10);
 
     //public Texture m_Cached;
 

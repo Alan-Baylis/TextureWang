@@ -23,7 +23,7 @@ public class Texture1Splatter : TextureMathOp
         node.m_OpType=MathOp.Splatter;
         node.m_Value1 = new FloatRemap(1.0f,-10000,10000);
         node.m_Value2 = new FloatRemap(4.0f, 0, 10.0f); //scale out
-        node.m_Value3 = new FloatRemap(3.0f); //count
+        node.m_Value3 = new FloatRemap(3.0f,0,100); //count
         node.m_BrightnessMin = new FloatRemap(0,0,1);
         node.m_BrightnessMax = new FloatRemap(1, 0, 1);
         node.m_ScaleMin = new FloatRemap(1, 0, 10);

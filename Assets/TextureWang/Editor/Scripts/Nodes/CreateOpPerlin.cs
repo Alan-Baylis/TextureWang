@@ -28,12 +28,12 @@ public class CreateOpPerlin : CreateOp
         node.rect = new Rect(pos.x, pos.y, m_NodeWidth, m_NodeHeight);
         node.name = "CreateOpPerlin";
         node.CreateOutput("Texture", "TextureParam", NodeSide.Right, 50);
-        node.m_Value1 = new FloatRemap(20.0f);
-        node.m_Value2 = new FloatRemap(20.0f);
-        node.m_Value5 = new FloatRemap(5.0f);
-        node.m_Value6 = new FloatRemap(5.0f);
-        node.m_lacunarity = new FloatRemap(2.0f);
-        node.m_gain = new FloatRemap(0.5f);
+        node.m_Value1 = new FloatRemap(20.0f,0,100);
+        node.m_Value2 = new FloatRemap(20.0f,0,100);
+        node.m_Value5 = new FloatRemap(5.0f,0,100);
+        node.m_Value6 = new FloatRemap(5.0f,0,100);
+        node.m_lacunarity = new FloatRemap(2.0f,1,4);
+        node.m_gain = new FloatRemap(0.5f,0,1);
         node.m_TexMode = TexMode.Greyscale;
         node.m_Octaves = 4;
 

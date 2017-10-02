@@ -18,7 +18,7 @@ public class Texture1Sobel : TextureMathOp
         node.name = "EdgeDetectSobel";
         node.CreateInputOutputs();
         node.m_OpType=MathOp.Sobel;
-        node.m_Value1 = new FloatRemap(10.0f);
+        node.m_Value1 = new FloatRemap(1.0f,0.0f,1.0f);
         node.m_Value2 = new FloatRemap(0.5f);
 
         return node;
@@ -26,9 +26,9 @@ public class Texture1Sobel : TextureMathOp
     public override void DrawNodePropertyEditor()
     {
         base.DrawNodePropertyEditor();
-        m_Value1.SliderLabelInt(this,"Dist");//,m_Value1, 0, 100);//,new GUIContent("Red", "Float"), m_R);
-                                                          //        m_Value3 = (int)FloatRemap.SliderLabel(this,"DistY", m_Value3, 0, 100);//,new GUIContent("Red", "Float"), m_R);
-        m_Value2.SliderLabel(this,"Min Threshold");//, m_Value2, 0.0f, 1.0f);//,new GUIContent("Red", "Float"), m_R);
+        m_Value1.SliderLabel(this,"Dist");
+                                          
+
         m_UseNearestColor = GUILayout.Toggle(m_UseNearestColor, "Use Nearest Color");
 
 

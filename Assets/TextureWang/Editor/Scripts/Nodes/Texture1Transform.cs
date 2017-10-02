@@ -27,8 +27,11 @@ public class Texture1Transform : TextureMathOp
         node.CreateInputOutputs();
         node.m_OpType=MathOp.Transform;
         node.m_Angle = new FloatRemap(0.0f,0,360);
-        node.m_ScaleX = new FloatRemap(0.5f,-10,10);
-        node.m_ScaleY = new FloatRemap(0.5f,-10,10);
+        node.m_ScaleX = new FloatRemap(1.0f,-10,10);
+        node.m_ScaleY = new FloatRemap(1.0f,-10,10);
+
+        node.m_OffsetX = new FloatRemap(0.0f, -10, 10);
+        node.m_OffsetY = new FloatRemap(0.0f, -10, 10);
 
         return node;
     }

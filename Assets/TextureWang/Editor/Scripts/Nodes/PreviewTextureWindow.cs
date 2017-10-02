@@ -11,17 +11,20 @@ using UnityEngine.PostProcessing;
         public TextureNode m_Source;
         public Texture2D m_tex;
         public bool m_Locked;
-        public bool m_Histogram=true;
+        public bool m_Histogram=false;
 
         public float m_Scale = 1.0f;
 
-    void OnDestroy()
+        void OnDestroy()
         {
             if(m_Buffer!=null)
                 m_Buffer.Release();
 
             m_List.Remove(this);
+            if (m_Source != null)
+                m_Source.RemoveRefreshWindow(this);
         }
+
         static ComputeShader m_ComputeShader2;
         ComputeBuffer m_Buffer;
         Material m_Material;
@@ -46,28 +49,21 @@ using UnityEngine.PostProcessing;
             cs.SetVector("_Res", new Vector4(source.width, source.height, 0f, 0f));
             cs.SetVector("_Channels", new Vector4(1f, 1f, 1f, 0f));
         
-        cs.Dispatch(kernel, Mathf.CeilToInt(source.width / 16f), Mathf.CeilToInt(source.height / 16f), 1);
+            cs.Dispatch(kernel, Mathf.CeilToInt(source.width / 16f), Mathf.CeilToInt(source.height / 16f), 1);
 
-
-
-
-
-        kernel = cs.FindKernel("KHistogramScale");
-        cs.SetBuffer(kernel, "_Histogram", m_Buffer);
-        cs.SetVector("_Res", new Vector4(512, 512, m_Scale, 0f));
-        cs.Dispatch(kernel, 1, 1, 1);
-        Material m = TextureNode.GetMaterial("TextureOps");
+            kernel = cs.FindKernel("KHistogramScale");
+            cs.SetBuffer(kernel, "_Histogram", m_Buffer);
+            cs.SetVector("_Res", new Vector4(512, 512, m_Scale, 0f));
+            cs.Dispatch(kernel, 1, 1, 1);
+            Material m = TextureNode.GetMaterial("TextureOps");
         
-        m.SetVector("_Multiply",new Vector4(preview.width,preview.height,0,0));
-        m.SetBuffer("_Histogram", m_Buffer);
-        Graphics.Blit(m_Source.m_Cached, preview, m,  (int)ShaderOp.Histogram);
-    }
+            m.SetVector("_Multiply",new Vector4(preview.width,preview.height,0,0));
+            m.SetBuffer("_Histogram", m_Buffer);
+            Graphics.Blit(m_Source.m_Cached, preview, m,  (int)ShaderOp.Histogram);
+        }
         public static void Init(TextureNode _src)
         {
-        /*
-                    if (m_Source != null)
-                        m_Source.m_Refresh = null;
-        */
+
             PreviewTextureWindow window = null;
             foreach (var x in m_List)
             {
@@ -85,10 +81,10 @@ using UnityEngine.PostProcessing;
             else
             {
                 if (window.m_Source != null)
-                    window.m_Source.m_Refresh = null;
+                    window.m_Source.RemoveRefreshWindow(window);
             }
             //GetWindow<PreviewTextureWindow>();//ScriptableObject.CreateInstance<PreviewTextureWindow>();
-            _src.m_Refresh = window;
+            _src.AddRefreshWindow( window);
             window.m_Source = _src;
 
 
