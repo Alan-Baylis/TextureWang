@@ -37,6 +37,10 @@ public class CreateOpGrid : CreateOp
     {
 
     }
+    public override void SetUniqueVars(Material _mat)
+    {
+        _mat.SetVector("_Multiply2", new Vector4(m_Value5, m_Value6, m_Value7 , m_Value8 ));
+    }
     public override void DrawNodePropertyEditor()
     {
         base.DrawNodePropertyEditor();

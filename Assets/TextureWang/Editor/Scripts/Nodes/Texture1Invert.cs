@@ -22,13 +22,14 @@ public class Texture1Invert : TextureMathOp
     public override void DrawNodePropertyEditor()
     {
         base.DrawNodePropertyEditor();
+/*
         m_Value1.SliderLabel(this,"Red");//, -10.0f, 10.0f);//,new GUIContent("Red", "Float"), m_R);
         if (m_TexMode == TexMode.ColorRGB)
         {
             m_Value2.SliderLabel(this,"Green");//, -1.0f, 1.0f); //,new GUIContent("Red", "Float"), m_R);
             m_Value3.SliderLabel(this,"Blue");//, -1.0f, 1.0f); //,new GUIContent("Red", "Float"), m_R);
         }
-
+*/
 
 
     }

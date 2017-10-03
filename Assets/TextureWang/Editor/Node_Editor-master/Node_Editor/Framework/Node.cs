@@ -375,7 +375,7 @@ namespace NodeEditorFramework
 				            input.GetDirection(),
 				            ConnectionTypes.GetTypeData(output.type, true).Color);
 
-//                        EditorGUI.LabelField(new Rect(input.GetGUIKnob().center-new Vector2(50,20), new Vector2(200, 50)), input.name);
+                        //EditorGUI.LabelField(new Rect(input.GetGUIKnob().center-new Vector2(50,20), new Vector2(200, 50)), input.name);
 
                     }
                 }

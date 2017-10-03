@@ -62,6 +62,7 @@ using UnityEditor;
         ProbabilityBlend = 38,
         RandomEdge=39,
         CopyRGBA = 40,
+        CopyNormalMap=41,
 
 
     SetCol = 0,

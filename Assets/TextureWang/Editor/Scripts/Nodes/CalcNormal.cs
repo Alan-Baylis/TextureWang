@@ -53,7 +53,7 @@ public class CalcNormal : TextureOp
         m_TexMode=TexMode.ColorRGB;
         RenderTexture destination = CreateRenderDestination(_input, _output);
         SetCommonVars(mat);
-        Graphics.Blit(_input.GetHWSourceTexture(), destination, mat, 3);
+        Graphics.Blit(_input.GetHWSourceTexture(), destination, mat, (int)ShaderOp.Normal);
 
 
 //        Debug.LogError(" multiply in Final" + timer.ElapsedMilliseconds + " ms");

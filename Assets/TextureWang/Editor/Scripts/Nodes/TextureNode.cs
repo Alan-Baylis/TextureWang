@@ -203,10 +203,17 @@ public abstract class TextureNode : Node
     }
 
     protected internal abstract void InspectorNodeGUI();
-    
+    static string ms_PathName;
     public override void DrawNodePropertyEditor()
     {
         //GUI.changed = false;
+        if (GUILayout.Button("save png"))
+        {
+
+            ms_PathName = EditorUtility.SaveFilePanel("SavePNG", "Assets/", ms_PathName, "png");
+
+            m_Param.SavePNG(ms_PathName);
+        }
         m_TexMode = (TexMode)UnityEditor.EditorGUILayout.EnumPopup(new GUIContent("Colors", "3 components per texture or one"), m_TexMode, GUILayout.MaxWidth(300));
 
 

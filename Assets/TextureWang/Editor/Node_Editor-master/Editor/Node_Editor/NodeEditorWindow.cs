@@ -60,7 +60,40 @@ namespace NodeEditorFramework
             GUILayout.EndHorizontal();
         }
     }
+    public class StartTextureWangPopup : EditorWindow
+    {
+        int m_Width = 1024;
+        int m_Height = 1024;
+        private NodeEditorWindow m_Parent;
 
+
+        public static void Init(NodeEditorWindow _inst)
+        {
+            
+            StartTextureWangPopup window = ScriptableObject.CreateInstance<StartTextureWangPopup>();
+            window.m_Parent = _inst;
+            window.position = new Rect(_inst.canvasWindowRect.x + _inst.canvasWindowRect.width * 0.5f, _inst.canvasWindowRect.y + _inst.canvasWindowRect.height * 0.5f, 350, 250);
+            window.titleContent = new GUIContent("Welcome To TextureWang");
+            window.ShowUtility();
+        }
+
+        void OnGUI()
+        {
+
+
+            EditorGUILayout.LabelField("\n Welcome to TextureWang \n \n If you find it useful please consider becoming a patreon \nto help support future features \n ", EditorStyles.wordWrappedLabel);
+            if (GUILayout.Button("https://www.patreon.com/TextureWang"))
+            {
+                Application.OpenURL("https://www.patreon.com/TextureWang");
+            }
+                if (GUILayout.Button("OK"))
+            {
+                
+                this.Close();
+            }
+            
+        }
+    }
     public class NodeEditorWindow : EditorWindow , ITreeDataProvider
     {
         private string m_Name;
@@ -97,7 +130,8 @@ namespace NodeEditorFramework
             _editor = GetWindow<NodeEditorWindow> ();
             _editor.m_Name = "Copy";
             _editor.minSize = new Vector2 (800, 600);
-			NodeEditor.ClientRepaints += _editor.Repaint;
+            
+            NodeEditor.ClientRepaints += _editor.Repaint;
 			NodeEditor.initiated = NodeEditor.InitiationError = false;
 
 			iconTexture = ResourceManager.LoadTexture (EditorGUIUtility.isProSkin? "Textures/Icon_Dark.png" : "Textures/Icon_Light.png");
@@ -105,7 +139,7 @@ namespace NodeEditorFramework
             _editor.m_NodeSelectionWindow = MultiColumnWindow.GetWindow(_editor);
 
             _editor.m_InspectorWindow = NodeInspectorWindow.Init(_editor);
-
+            StartTextureWangPopup.Init(_editor);
 
         }
         public static void CreateEditorCopy()

@@ -134,7 +134,17 @@ public class UnityTextureOutput : TextureNode
             m.SetInt("_MainIsGrey", input.IsGrey() ? 1 : 0);
             m.SetInt("_TextureBIsGrey", input2.IsGrey() ? 1 : 0);
             m.SetTexture("_GradientTex", input2.GetHWSourceTexture());
-            Graphics.Blit(input.GetHWSourceTexture(), rt, m, (int)ShaderOp.CopyColorAndAlpha);
+            string path=AssetDatabase.GetAssetPath(m_Output);
+            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(path);
+            if (importer.textureType == TextureImporterType.NormalMap)
+            {
+                Graphics.Blit(input.GetHWSourceTexture(), rt, m, (int)ShaderOp.CopyNormalMap);
+            }
+            else
+            {
+                Graphics.Blit(input.GetHWSourceTexture(), rt, m, (int)ShaderOp.CopyColorAndAlpha);
+            }
+            
 
             RenderTexture.active = rt;
             m_Output.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);

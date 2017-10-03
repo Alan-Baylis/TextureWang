@@ -869,6 +869,16 @@ Shader "Hidden/TextureOps" {
 		//col.b = 0;
 		return col;
 	}
+	//unity will unpack this 	
+	float4 fragCopyNormal(v2f i) : SV_Target
+	{
+		float4 col = GetTextureMain4(_MainTex,i.uv);
+		float4 norm=0;
+		norm.y = col.y;
+		norm.a = col.x;
+		
+		return norm;
+	}
 	StructuredBuffer<uint4> _Histogram;
 
 	float4 fragHistogram(v2f i) : SV_Target
@@ -1252,6 +1262,15 @@ Shader "Hidden/TextureOps" {
 		CGPROGRAM
 #pragma vertex vertMult
 #pragma fragment fragCopyColRGBA
+		ENDCG
+	}
+		Pass
+	{//41
+		ZTest Always Cull Off ZWrite Off
+
+		CGPROGRAM
+#pragma vertex vertMult
+#pragma fragment fragCopyNormal
 		ENDCG
 	}
 	}

@@ -99,9 +99,16 @@ public class SubTreeNode : TextureNode
                 NodeEditorSaveManager.CreateWorkingCopy(ref m_SubCanvas, false);
                 m_WasCloned = true;
             }
+            
             List<NodeInput> needsInput = new List<NodeInput>();
+            List<UnityTextureOutput> needsOutput = new List<UnityTextureOutput>();
             foreach (Node n in m_SubCanvas.nodes)
             {
+                if (n is UnityTextureOutput && n.Inputs[0].connection!=null)
+                {
+                    needsOutput.Add(n as UnityTextureOutput);
+                    
+                }
                 if (n.Inputs.Count > 0)
                 {
                     for (int i = 0; i < n.Inputs.Count; i++)
@@ -115,6 +122,18 @@ public class SubTreeNode : TextureNode
                     }
                 }
             }
+            if (needsOutput.Count > Outputs.Count)
+            {
+                
+                while (needsOutput.Count > Outputs.Count)
+                {
+                    //                    Debug.Log(" create input "+Inputs.Count);
+                    CreateOutput("Texture" + Outputs.Count+" "+ needsOutput[needsOutput.Count - 1].m_TexName, needsOutput[needsOutput.Count - 1].Inputs[0].connection.type, NodeSide.Right, 50 + Outputs.Count * 20);
+                }
+            }
+            if(needsOutput.Count>0)
+                Outputs[0].name = "Texture0" + " " + needsOutput[0].m_TexName;
+
             if (needsInput.Count > Inputs.Count)
             {
                 while (needsInput.Count > Inputs.Count)
@@ -133,6 +152,32 @@ public class SubTreeNode : TextureNode
     public override void OnLoadCanvas()
     {
         FixupForSubCanvas();
+    }
+
+    protected internal override void DrawConnections()
+    {
+        base.DrawConnections();
+
+        if (Event.current.type != EventType.Repaint)
+            return;
+        foreach (NodeOutput output in Outputs)
+        {
+            if (output == null)
+                continue;
+            Vector2 startPos = output.GetGUIKnob().center;
+            Vector2 startDir = output.GetDirection();
+
+//            foreach (NodeInput input in output.connections)
+            {
+//                if (input != null)
+                {
+
+
+                    EditorGUI.LabelField(new Rect(startPos - new Vector2(0, 20), new Vector2(200, 50)), output.name);
+
+                }
+            }
+        }
     }
 
     public override bool Calculate()
@@ -176,20 +221,24 @@ public class SubTreeNode : TextureNode
 
 
             NodeEditor.RecalculateAllAnd(m_SubCanvas, workList);
-
+            int countOut = 0;
             foreach (Node n in m_SubCanvas.nodes)
             {
                 if (n is UnityTextureOutput)
                 {
                     m_Param = n.Inputs[0].GetValue<TextureParam>();
+                    Outputs[countOut++].SetValue<TextureParam>(m_Param);
                 }
                 else
                 if (n.Outputs.Count>0 && n.Outputs[0].connections.Count == 0)
                 {
                     //this node has no output so it must be the final destination
                     m_Param = n.Outputs[0].GetValue<TextureParam>();
+                    Outputs[countOut++].SetValue<TextureParam>(m_Param);
                 }
-                
+                if (countOut >= Outputs.Count)
+                    break;
+
             }
             foreach (var x in needsRemoval)
             {
@@ -197,7 +246,7 @@ public class SubTreeNode : TextureNode
             }
             CreateCachedTextureIcon();
             //m_Cached = m_Param.GetHWSourceTexture();
-            Outputs[0].SetValue<TextureParam>(m_Param);
+            
         }
 
         return true;

@@ -29,7 +29,7 @@ public class NodeInspectorWindow : EditorWindow
         window.titleContent=new GUIContent("TextureWang");
         window.Show();
         window.Repaint();
-
+        
         return window;
 
     }
