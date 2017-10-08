@@ -420,7 +420,7 @@ namespace NodeEditorFramework
                 else if (eventType == EventType.DragPerform && DragAndDrop.GetGenericData("GenericDragColumnDragging") != null)
                 {
                     DragAndDrop.AcceptDrag();
-                    Debug.LogError("dragged generic data "+ DragAndDrop.GetGenericData("GenericDragColumnDragging"));
+                    //Debug.Log("dragged generic data "+ DragAndDrop.GetGenericData("GenericDragColumnDragging"));
                     List<UnityEditor.IMGUI.Controls.TreeViewItem> _data =DragAndDrop.GetGenericData("GenericDragColumnDragging") as List<UnityEditor.IMGUI.Controls.TreeViewItem>;
                     var draggedElements = new List<TreeElement>();
                     foreach (var x in _data)
