@@ -55,7 +55,7 @@ namespace NodeEditorFramework
 		/// </summary>
 		public static Node getDefaultNode (string nodeID)
 		{
-            Debug.Log(" getDefaultNode "+nodeID);
+//            Debug.Log(" getDefaultNode "+nodeID);
 			return nodes.Keys.Single<Node> ((Node node) => node.GetID == nodeID);
 		}
 

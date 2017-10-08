@@ -75,7 +75,7 @@ public class SubTreeNode : TextureNode
         }
         //Debug.LogError(" set canvasGuid textfiled " + m_CanvasGuid);
 #endif
-        m_SubCanvas = (NodeCanvas)EditorGUI.ObjectField(new Rect(0, 250, 250, 50), m_SubCanvas, typeof(NodeCanvas), false);
+//        m_SubCanvas = (NodeCanvas)EditorGUI.ObjectField(new Rect(0, 250, 250, 50), m_SubCanvas, typeof(NodeCanvas), false);
 
 
     }
@@ -136,10 +136,14 @@ public class SubTreeNode : TextureNode
 
             if (needsInput.Count > Inputs.Count)
             {
-                while (needsInput.Count > Inputs.Count)
+              //  while (needsInput.Count > Inputs.Count)
+                int startInputCount = Inputs.Count;
+//                for(int index= needsInput.Count-1;index>= startInputCount; index--)
+                for (int index = Inputs.Count ; index < needsInput.Count; index++)
                 {
+                    string name = needsInput[index].name;
                     //                    Debug.Log(" create input "+Inputs.Count);
-                    CreateInput("Texture" + Inputs.Count, needsInput[needsInput.Count-1].type, NodeSide.Left, 30 + Inputs.Count*20);
+                    CreateInput(name, needsInput[index].type, NodeSide.Left, 30 + Inputs.Count*20);
                 }
 
                 return false;

@@ -7,6 +7,9 @@ using System;
 [Node (false, "Source/Perlin")]
 public class CreateOpPerlin : CreateOp
 {
+    private const string m_Help = "Perlin Noise, Integer scales produce wrapping texture output";
+    public override string GetHelp() { return m_Help; }
+
     public enum TexOP {  PerlinBm, PerlinTurb, PerlinRidge, VeroniNoise }
     public TexOP m_OpType = TexOP.PerlinBm;
 

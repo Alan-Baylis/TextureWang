@@ -37,6 +37,7 @@ public abstract class TextureNode : Node
     public FloatRemap m_OutputMax = new FloatRemap(1.0f, 0, 1);
     public FloatRemap m_ScalePreview = new FloatRemap(1.0f);
     private bool m_ShowLevels;
+    private bool m_ShowNames;
 
     public void AddRefreshWindow(EditorWindow _w)
     {
@@ -215,7 +216,18 @@ public abstract class TextureNode : Node
             m_Param.SavePNG(ms_PathName);
         }
         m_TexMode = (TexMode)UnityEditor.EditorGUILayout.EnumPopup(new GUIContent("Colors", "3 components per texture or one"), m_TexMode, GUILayout.MaxWidth(300));
-
+        m_ShowNames = EditorGUILayout.Foldout(m_ShowNames, "Input Rename:");
+        if (m_ShowNames)
+        {
+            foreach (var x in Inputs)
+            {
+                if (x == null)
+                    continue;
+                GUILayout.BeginHorizontal();
+                x.name = (string)GUILayout.TextField(x.name);
+                GUILayout.EndHorizontal();
+            }
+        }
 
         EditorGUILayout.LabelField("TexWidth");
         m_TexWidth=(int)EditorGUILayout.Slider(m_TexWidth, 1.0f, 2048.0f);
@@ -244,6 +256,7 @@ public abstract class TextureNode : Node
             m_OutputGamma.SliderLabel(this, "Scale Output Gamma");
             m_OutputMax.SliderLabel(this, "Scale Output Out Max");
         }
+
 
         EditorGUILayout.Space();
         RTEditorGUI.Seperator();

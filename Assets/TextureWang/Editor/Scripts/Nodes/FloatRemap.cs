@@ -131,18 +131,14 @@ public struct FloatRemap
             m_Replacement = null;
         }
         //        GUI.enabled = m_ReplaceWithInput;
-/* //no rename, might come back an an option for exported subcanvas
-        if (m_ReplaceWithInput && false)
+ 
+        if (m_ReplaceWithInput && m_Replacement!=null)
         {
             GUILayout.BeginHorizontal();
-            //        m_ReplaceWithInputNext = GUILayout.Toggle(m_ReplaceWithInput, ">>");
-            string str = m_ReplaceWithInput ? m_Replacement.name : "";
-            str = (string) GUILayout.TextField(str);
-
+            m_Replacement.name = (string) GUILayout.TextField(m_Replacement.name);
             GUILayout.EndHorizontal();
-            m_Replacement.name = str;
         }
-*/
+
         if (m_ReplaceWithInput)
         {
 

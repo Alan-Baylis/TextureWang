@@ -579,6 +579,22 @@ Shader "Hidden/TextureOps" {
 		return ProcessOutput(color);
 
 	}
+
+		float4 fragMaskedBlend(v2f i) : SV_Target
+	{
+		float4 color0 = GetTextureMain4(_MainTex, i.uv);
+		float4 color1 = GetTextureB4(_GradientTex, i.uv);
+		float probability = tex2D(_GradientTex2, i.uv).r;
+
+		float rand = wangHash(i.uv.x * 1093 + i.uv.y * 999983)*2.0 / 4294967295.0f;
+		float4 color = color0;
+		
+		color = lerp(color0,color1, probability);
+
+		return ProcessOutput(color);
+
+	}
+
 		float4 fragRandomEdge(v2f i) : SV_Target
 	{
 		float4 color = GetTextureMain4(_MainTex, i.uv);
@@ -1271,6 +1287,15 @@ Shader "Hidden/TextureOps" {
 		CGPROGRAM
 #pragma vertex vertMult
 #pragma fragment fragCopyNormal
+		ENDCG
+	}
+		Pass
+	{//42
+		ZTest Always Cull Off ZWrite Off
+
+		CGPROGRAM
+#pragma vertex vertMult
+#pragma fragment fragMaskedBlend
 		ENDCG
 	}
 	}

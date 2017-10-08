@@ -27,7 +27,7 @@ namespace UnityEditor.TreeViewExamples
 		{
 			var window = GetWindow<MultiColumnWindow>();
             window.m_DataProvider = _data;
-            window.titleContent = new GUIContent("Multi Columns");
+            window.titleContent = new GUIContent("Nodes");
 			window.Focus();
 			window.Repaint();
 			return window;

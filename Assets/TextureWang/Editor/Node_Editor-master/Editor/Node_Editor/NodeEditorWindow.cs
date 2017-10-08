@@ -135,26 +135,14 @@ namespace NodeEditorFramework
 			NodeEditor.initiated = NodeEditor.InitiationError = false;
 
 			iconTexture = ResourceManager.LoadTexture (EditorGUIUtility.isProSkin? "Textures/Icon_Dark.png" : "Textures/Icon_Light.png");
-			_editor.titleContent = new GUIContent ("Node Editor", iconTexture);
+			_editor.titleContent = new GUIContent ("Texture Wang Nodes", iconTexture);
             _editor.m_NodeSelectionWindow = MultiColumnWindow.GetWindow(_editor);
 
             _editor.m_InspectorWindow = NodeInspectorWindow.Init(_editor);
             StartTextureWangPopup.Init(_editor);
 
         }
-        public static void CreateEditorCopy()
-        {
-            
-            _editor2 = CreateInstance<NodeEditorWindow>();
-            _editor2.m_Name = "Copy";
-            _editor2.minSize = new Vector2(800, 600);
-            NodeEditor.ClientRepaints += _editor2.Repaint;
-            //NodeEditor.initiated = NodeEditor.InitiationError = false;
 
-            //iconTexture = ResourceManager.LoadTexture(EditorGUIUtility.isProSkin ? "Textures/Icon_Dark.png" : "Textures/Icon_Light.png");
-            _editor2.titleContent = new GUIContent("Node Editor2", iconTexture);
-//            _editor.m_NodeSelectionWindow = MultiColumnWindow.GetWindow(_editor);
-        }
 
         /// <summary>
         /// Handle opening canvas when double-clicking asset

@@ -63,6 +63,7 @@ using UnityEditor;
         RandomEdge=39,
         CopyRGBA = 40,
         CopyNormalMap=41,
+        MaskedBlend = 42,
 
 
     SetCol = 0,
