@@ -32,27 +32,34 @@ namespace UnityEditor.TreeViewExamples
 			window.Repaint();
 			return window;
 		}
-/*
-		[OnOpenAsset]
-		public static bool OnOpenAsset (int instanceID, int line)
-		{
-			var myTreeAsset = EditorUtility.InstanceIDToObject (instanceID) as MyTreeAsset;
-			if (myTreeAsset != null)
-			{
-				var window = GetWindow ();
-				window.SetTreeAsset(myTreeAsset);
-				return true;
-			}
-			return false; // we did not handle the open
-		}
 
-		void SetTreeAsset (MyTreeAsset myTreeAsset)
-		{
-			m_MyTreeAsset = myTreeAsset;
-			m_Initialized = false;
-		}
-*/
-		Rect multiColumnTreeViewRect
+	    public void ReInit()
+	    {
+	        m_Initialized = false;
+            InitIfNeeded();
+	    }
+
+	    /*
+                [OnOpenAsset]
+                public static bool OnOpenAsset (int instanceID, int line)
+                {
+                    var myTreeAsset = EditorUtility.InstanceIDToObject (instanceID) as MyTreeAsset;
+                    if (myTreeAsset != null)
+                    {
+                        var window = GetWindow ();
+                        window.SetTreeAsset(myTreeAsset);
+                        return true;
+                    }
+                    return false; // we did not handle the open
+                }
+
+                void SetTreeAsset (MyTreeAsset myTreeAsset)
+                {
+                    m_MyTreeAsset = myTreeAsset;
+                    m_Initialized = false;
+                }
+        */
+        Rect multiColumnTreeViewRect
 		{
 			get { return new Rect(20, 30, position.width-40, position.height-60); }
 		}

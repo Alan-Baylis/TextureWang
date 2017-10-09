@@ -3,12 +3,14 @@ using NodeEditorFramework.Utilities;
 using UnityEngine;
 
 [Node (false, "TextureOp/CalcNormal")]
-public class CalcNormal : TextureOp
+public class CalcNormal : TextureNode
 {
     public new const string ID = "CalcNormal";
     public override string GetID { get { return ID; } }
 
     //public Texture m_Cached;
+
+    public FloatRemap m_Value1=new FloatRemap(10,0,100);
 
 
     protected internal override void InspectorNodeGUI()
@@ -25,7 +27,7 @@ public class CalcNormal : TextureOp
         node.name = "CalcNormal";
         node.CreateInput("Texture", "TextureParam", NodeSide.Left, 50);
         node.CreateOutput("Texture", "TextureParam", NodeSide.Right, 50);
-        node.m_OpType = TexOP.CalcNormal;
+//        node.m_OpType = TexOP.CalcNormal;
         return node;
     }
 
@@ -74,7 +76,7 @@ public class CalcNormal : TextureOp
             m_Param = new TextureParam(m_TexWidth,m_TexHeight);
         if (input == null)
             Debug.LogError(" input null");
-        float[] values = { m_Value1, m_Value2, m_Value3 };
+        float[] values = { m_Value1, m_Value1, m_Value1 };
 
         if (input != null && m_Param != null)
         {

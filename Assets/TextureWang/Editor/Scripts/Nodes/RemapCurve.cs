@@ -4,13 +4,13 @@ using UnityEditor;
 using UnityEngine;
 
 [Node (false, "OneInput/RemapCurve")]
-public class RemapCurve : TextureOp
+public class RemapCurve : TextureNode
 {
     public const string ID = "RemapCurve";
     public override string GetID { get { return ID; } }
 
     public AnimationCurve m_RemapCurve=new AnimationCurve();
-
+    protected Texture2D gradient;// = new Texture2D(256, 1, TextureFormat.ARGB32, false);
     //public Texture m_Cached;
 
 
@@ -100,7 +100,7 @@ public class RemapCurve : TextureOp
 
         if (input != null && m_Param != null)
         {
-            ExecuteRemapCurve(m_Value1, input, m_Param);
+            ExecuteRemapCurve(0.0f, input, m_Param);
 
         }
         CreateCachedTextureIcon();

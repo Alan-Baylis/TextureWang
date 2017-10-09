@@ -18,7 +18,7 @@ namespace NodeEditorFramework
         int m_Width = 1024;
         int m_Height = 1024;
         private NodeEditorWindow m_Parent;
-
+        private string m_Path= "Assets/TextureWang/OutputTextures";
         
         public static void Init(NodeEditorWindow _inst)
         {
@@ -29,7 +29,18 @@ namespace NodeEditorFramework
             window.titleContent=new GUIContent("New TextureWang Canvas");
             window.ShowUtility();
         }
+        public string MakePNG(string path,string _append)
+        {
+            string name = path.Replace(".png", _append + ".png");
+            var tex = new Texture2D(m_Width, m_Height, TextureParam.ms_TexFormat, false);
+            byte[] bytes = tex.EncodeToPNG();
 
+            if (!string.IsNullOrEmpty(name))
+            {
+                File.WriteAllBytes(name, bytes);
+            }
+            return name;
+        }
         void OnGUI()
         {
             
@@ -46,6 +57,15 @@ namespace NodeEditorFramework
             m_Height = EditorGUILayout.IntField(m_Height);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Separator();
+            m_Path = EditorGUILayout.TextField(m_Path);
+            if (GUILayout.Button(new GUIContent("Browse Output Path", "Path to Output Textures to")))
+            {
+                m_Path = EditorUtility.SaveFilePanelInProject("Save Node Canvas", "", "png", "", m_Path);
+            }
+            EditorGUILayout.Separator();
+
+
+
             //            m_Height = EditorGUILayout.IntField(m_Height);
             //            m_Noise = EditorGUILayout.FloatField(m_Noise);
 
@@ -55,9 +75,33 @@ namespace NodeEditorFramework
             if (GUILayout.Button("Create"))
             {
                 m_Parent.NewNodeCanvas(m_Width,m_Height);
+
+                float yOffset = 200;
+                MakeTextureNodeAndTexture("_albedo",new Vector2(0,0));
+                MakeTextureNodeAndTexture("_normal", new Vector2(0, 1*yOffset));
+                MakeTextureNodeAndTexture("_height", new Vector2(0, 2*yOffset));
+                MakeTextureNodeAndTexture("_MetalAndRoughness", new Vector2(0, 3*yOffset));
+
+
                 this.Close();
+
             }
             GUILayout.EndHorizontal();
+        }
+
+        private void MakeTextureNodeAndTexture(string texName,Vector2 _pos)
+        {
+            string albedo = MakePNG(m_Path, texName);
+            AssetDatabase.ImportAsset(albedo, ImportAssetOptions.ForceSynchronousImport);
+            Texture2D albedoTexture = (Texture2D) AssetDatabase.LoadAssetAtPath(albedo, typeof (Texture2D));
+
+            var n = Node.Create("UnityTextureOutput", _pos);
+            UnityTextureOutput uto = n as UnityTextureOutput;
+            if (uto != null)
+            {
+                uto.m_Output = albedoTexture;
+                uto.m_TexName = albedo;
+            }
         }
     }
     public class StartTextureWangPopup : EditorWindow
@@ -105,7 +149,7 @@ namespace NodeEditorFramework
                         }
                         if (GUILayout.Button("https://www.patreon.com/TextureWang"))
                         {
-                            this.Close();
+                            this.Close(); 
                             Application.OpenURL("https://www.patreon.com/TextureWang");
                         }
                         if (GUILayout.Button("Ignore new version"))
@@ -457,6 +501,8 @@ namespace NodeEditorFramework
 			        SaveNodeCanvas(path);
 
                 }
+                if(m_NodeSelectionWindow!=null)
+			        m_NodeSelectionWindow.ReInit();
 			}
 /*
             if (GUILayout.Button(new GUIContent("New Canvas",
@@ -669,8 +715,8 @@ namespace NodeEditorFramework
             mainEditorState = CreateInstance<NodeEditorState> ();
 			mainEditorState.canvas = mainNodeCanvas;
 			mainEditorState.name = "MainEditorState";
-
-			openedCanvasPath = "";
+		    NodeEditor.curNodeCanvas = mainNodeCanvas;
+            openedCanvasPath = "";
 			SaveCache ();
 		}
 		

@@ -8,8 +8,9 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: proceduralUnity
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: SILHOUETTE_CURVATURE_BASIC _NORMALMAP _PARALLAX_POM_ZWRITE _POM_DISTANCE_MAP_SHADOWS
-    _POM_EXTRUSION_MAP_SHADOWS _TESSELLATION_DISPLACEMENT _WETNESS_NONE
+  m_ShaderKeywords: SILHOUETTE_CURVATURE_BASIC _NORMALMAP _PARALLAXMAP _PARALLAX_POM_ZWRITE
+    _POM_DISTANCE_MAP_SHADOWS _POM_EXTRUSION_MAP_SHADOWS _TESSELLATION_DISPLACEMENT
+    _WETNESS_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -76,11 +77,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 28658c19914687f469f0216fcd8dffb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a03527d5dc3fce14385fcb16c92229a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap2:
@@ -166,17 +167,17 @@ Material:
     - _GlitterMask: 0
     - _GlitterShown: 1
     - _GlitterTiling: 1
-    - _GlossMapScale: 0.827
+    - _GlossMapScale: 0.077
     - _GlossMax: 0.782
     - _GlossMin: 0
-    - _Glossiness: 1
+    - _Glossiness: 0.104
     - _Glossiness2: 1
     - _GlossyReflections: 1
     - _MainShown: 1
-    - _Metallic: 0
+    - _Metallic: 0.2
     - _MinPulseBrightness: 0
     - _Mode: 0
-    - _OcclusionStrength: 0.476
+    - _OcclusionStrength: 0.407
     - _OcclusionStrength2: 0
     - _Occlusion_from_albedo_alpha: 1
     - _POM: 1
@@ -190,7 +191,7 @@ Material:
     - _PanEmissionMask: 0
     - _PanUSpeed: 0
     - _PanVSpeed: 0
-    - _Parallax: 0.0192
+    - _Parallax: 0.0116
     - _Parallax2: 0.04
     - _Phong: 0.579
     - _Pierceable: 0

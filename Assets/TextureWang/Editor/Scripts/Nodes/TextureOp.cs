@@ -1,4 +1,4 @@
-﻿
+﻿#if UNUSED
 using UnityEngine;
 using System.Collections.Generic;
 using NodeEditorFramework;
@@ -225,3 +225,4 @@ public class TextureOp : TextureNode
         return true;
 	}
 }
+#endif
