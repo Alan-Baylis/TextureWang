@@ -9,479 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e0c2324a9ab1224ebe3edad393e3544, type: 3}
-  m_Name: LastSession
+  m_Name: New Canvas
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 114240126325378156}
-  - {fileID: 114804108116032802}
-  - {fileID: 114991164124404900}
-  - {fileID: 114058888434530634}
+  - {fileID: 114675685090097014}
+  - {fileID: 114909932235058954}
+  - {fileID: 114035638082030702}
+  - {fileID: 114347722740722130}
+  - {fileID: 114184654046685470}
   m_TexWidth: 1024
   m_TexHeight: 1024
   scaleMode: 0
---- !u!114 &114028712851628260
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
-  m_Name: MainEditorState
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 11400000}
-  parentEditor: {fileID: 0}
-  drawing: 1
-  selectedNode: {fileID: 0}
-  wantselectedNode: {fileID: 0}
-  panOffset: {x: 0, y: 0}
-  zoom: 1
---- !u!114 &114058888434530634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
-  m_Name: UnityTextureOutput
-  m_EditorClassIdentifier: 
-  rect:
-    serializedVersion: 2
-    x: 0
-    y: 600
-    width: 150
-    height: 150
-  nodeKnobs:
-  - {fileID: 114972485859574984}
-  - {fileID: 114335950630513140}
-  Inputs:
-  - {fileID: 114972485859574984}
-  - {fileID: 114335950630513140}
-  Outputs: []
-  m_Doc: 
-  m_Parent: {fileID: 0}
-  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
-  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
-  m_CanDragSize: 0
-  m_DirtyID: 0
-  m_Cached: {fileID: 0}
-  m_TexMode: 1
-  m_TexWidth: 1024
-  m_TexHeight: 1024
-  m_Saturate: 1
-  m_InvertInput: 0
-  m_ClampInputUV: 0
-  m_InvertOutput: 0
-  m_InputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_InputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputGamma:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 10
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_ScalePreview:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_Output: {fileID: 0}
-  m_TexName: 
---- !u!114 &114139064145786952
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: RGB
-  m_EditorClassIdentifier: 
-  body: {fileID: 114991164124404900}
-  side: 4
-  sidePosition: 50
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114240126325378156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
-  m_Name: UnityTextureOutput
-  m_EditorClassIdentifier: 
-  rect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 150
-    height: 150
-  nodeKnobs:
-  - {fileID: 114592269170706464}
-  - {fileID: 114765886010520018}
-  Inputs:
-  - {fileID: 114592269170706464}
-  - {fileID: 114765886010520018}
-  Outputs: []
-  m_Doc: 
-  m_Parent: {fileID: 0}
-  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
-  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
-  m_CanDragSize: 0
-  m_DirtyID: 0
-  m_Cached: {fileID: 0}
-  m_TexMode: 1
-  m_TexWidth: 1024
-  m_TexHeight: 1024
-  m_Saturate: 1
-  m_InvertInput: 0
-  m_ClampInputUV: 0
-  m_InvertOutput: 0
-  m_InputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_InputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputGamma:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 10
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_ScalePreview:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_Output: {fileID: 2800000, guid: 6efaf100d7d3ff74ba9c9faf928e2651, type: 3}
-  m_TexName: Assets/TextureWang/OutputTextures/dave_albedo.png
---- !u!114 &114335950630513140
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: Alpha
-  m_EditorClassIdentifier: 
-  body: {fileID: 114058888434530634}
-  side: 4
-  sidePosition: 70
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114377881403882318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: RGB
-  m_EditorClassIdentifier: 
-  body: {fileID: 114804108116032802}
-  side: 4
-  sidePosition: 50
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114518384533232890
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: Alpha
-  m_EditorClassIdentifier: 
-  body: {fileID: 114804108116032802}
-  side: 4
-  sidePosition: 70
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114553980567739450
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: Alpha
-  m_EditorClassIdentifier: 
-  body: {fileID: 114991164124404900}
-  side: 4
-  sidePosition: 70
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114592269170706464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: RGB
-  m_EditorClassIdentifier: 
-  body: {fileID: 114240126325378156}
-  side: 4
-  sidePosition: 50
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114765886010520018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: Alpha
-  m_EditorClassIdentifier: 
-  body: {fileID: 114240126325378156}
-  side: 4
-  sidePosition: 70
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114804108116032802
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
-  m_Name: UnityTextureOutput
-  m_EditorClassIdentifier: 
-  rect:
-    serializedVersion: 2
-    x: 0
-    y: 200
-    width: 150
-    height: 150
-  nodeKnobs:
-  - {fileID: 114377881403882318}
-  - {fileID: 114518384533232890}
-  Inputs:
-  - {fileID: 114377881403882318}
-  - {fileID: 114518384533232890}
-  Outputs: []
-  m_Doc: 
-  m_Parent: {fileID: 0}
-  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
-  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
-  m_CanDragSize: 0
-  m_DirtyID: 0
-  m_Cached: {fileID: 0}
-  m_TexMode: 1
-  m_TexWidth: 1024
-  m_TexHeight: 1024
-  m_Saturate: 1
-  m_InvertInput: 0
-  m_ClampInputUV: 0
-  m_InvertOutput: 0
-  m_InputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_InputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMin:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputGamma:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 10
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_OutputMax:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_ScalePreview:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 1
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_Output: {fileID: 2800000, guid: d837fc65da29ecd40ba062e3d3f20391, type: 3}
-  m_TexName: Assets/TextureWang/OutputTextures/dave_normal.png
---- !u!114 &114972485859574984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
-  m_Name: RGB
-  m_EditorClassIdentifier: 
-  body: {fileID: 114058888434530634}
-  side: 4
-  sidePosition: 50
-  sideOffset: 0
-  Optional: 0
-  connection: {fileID: 0}
-  type: TextureParam
---- !u!114 &114991164124404900
+--- !u!114 &114035638082030702
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -499,11 +38,11 @@ MonoBehaviour:
     width: 150
     height: 150
   nodeKnobs:
-  - {fileID: 114139064145786952}
-  - {fileID: 114553980567739450}
+  - {fileID: 114350011082820480}
+  - {fileID: 114797373098234064}
   Inputs:
-  - {fileID: 114139064145786952}
-  - {fileID: 114553980567739450}
+  - {fileID: 114350011082820480}
+  - {fileID: 114797373098234064}
   Outputs: []
   m_Doc: 
   m_Parent: {fileID: 0}
@@ -581,3 +120,601 @@ MonoBehaviour:
     m_OpenMinMax: 0
   m_Output: {fileID: 2800000, guid: cb82c42c404b41848abb6d5ca13c4e6b, type: 3}
   m_TexName: Assets/TextureWang/OutputTextures/dave_height.png
+--- !u!114 &114125341553807404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Alpha
+  m_EditorClassIdentifier: 
+  body: {fileID: 114675685090097014}
+  side: 4
+  sidePosition: 70
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114184654046685470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
+  m_Name: UnityTextureOutput
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 600
+    width: 150
+    height: 150
+  nodeKnobs:
+  - {fileID: 114360854203183018}
+  - {fileID: 114834623064500988}
+  Inputs:
+  - {fileID: 114360854203183018}
+  - {fileID: 114834623064500988}
+  Outputs: []
+  m_Doc: 
+  m_Parent: {fileID: 0}
+  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
+  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CanDragSize: 0
+  m_DirtyID: 0
+  m_Cached: {fileID: 0}
+  m_TexMode: 1
+  m_TexWidth: 1024
+  m_TexHeight: 1024
+  m_Saturate: 1
+  m_InvertInput: 0
+  m_ClampInputUV: 0
+  m_InvertOutput: 0
+  m_InputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_InputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputGamma:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 10
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_ScalePreview:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Output: {fileID: 2800000, guid: 7673d54fb19f26b4cb37ad525bd52f6b, type: 3}
+  m_TexName: Assets/TextureWang/OutputTextures/dave_occlusion.png
+--- !u!114 &114197463880481842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Alpha
+  m_EditorClassIdentifier: 
+  body: {fileID: 114347722740722130}
+  side: 4
+  sidePosition: 70
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114347722740722130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
+  m_Name: UnityTextureOutput
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 600
+    width: 150
+    height: 150
+  nodeKnobs:
+  - {fileID: 114877935610425416}
+  - {fileID: 114197463880481842}
+  Inputs:
+  - {fileID: 114877935610425416}
+  - {fileID: 114197463880481842}
+  Outputs: []
+  m_Doc: 
+  m_Parent: {fileID: 0}
+  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
+  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CanDragSize: 0
+  m_DirtyID: 0
+  m_Cached: {fileID: 0}
+  m_TexMode: 1
+  m_TexWidth: 1024
+  m_TexHeight: 1024
+  m_Saturate: 1
+  m_InvertInput: 0
+  m_ClampInputUV: 0
+  m_InvertOutput: 0
+  m_InputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_InputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputGamma:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 10
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_ScalePreview:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Output: {fileID: 2800000, guid: 4f6cf2790cb38254889124f8e7168a94, type: 3}
+  m_TexName: Assets/TextureWang/OutputTextures/dave_MetalAndRoughness.png
+--- !u!114 &114350011082820480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGB
+  m_EditorClassIdentifier: 
+  body: {fileID: 114035638082030702}
+  side: 4
+  sidePosition: 50
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114360854203183018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGB
+  m_EditorClassIdentifier: 
+  body: {fileID: 114184654046685470}
+  side: 4
+  sidePosition: 50
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114428631477535718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGB
+  m_EditorClassIdentifier: 
+  body: {fileID: 114675685090097014}
+  side: 4
+  sidePosition: 50
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114490687153133766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Alpha
+  m_EditorClassIdentifier: 
+  body: {fileID: 114909932235058954}
+  side: 4
+  sidePosition: 70
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114537072470719576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  parentEditor: {fileID: 0}
+  drawing: 1
+  selectedNode: {fileID: 0}
+  wantselectedNode: {fileID: 0}
+  panOffset: {x: 0, y: 0}
+  zoom: 1
+--- !u!114 &114675685090097014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
+  m_Name: UnityTextureOutput
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 150
+    height: 150
+  nodeKnobs:
+  - {fileID: 114428631477535718}
+  - {fileID: 114125341553807404}
+  Inputs:
+  - {fileID: 114428631477535718}
+  - {fileID: 114125341553807404}
+  Outputs: []
+  m_Doc: 
+  m_Parent: {fileID: 0}
+  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
+  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CanDragSize: 0
+  m_DirtyID: 0
+  m_Cached: {fileID: 0}
+  m_TexMode: 1
+  m_TexWidth: 1024
+  m_TexHeight: 1024
+  m_Saturate: 1
+  m_InvertInput: 0
+  m_ClampInputUV: 0
+  m_InvertOutput: 0
+  m_InputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_InputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputGamma:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 10
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_ScalePreview:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Output: {fileID: 2800000, guid: 6efaf100d7d3ff74ba9c9faf928e2651, type: 3}
+  m_TexName: Assets/TextureWang/OutputTextures/dave_albedo.png
+--- !u!114 &114797373098234064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Alpha
+  m_EditorClassIdentifier: 
+  body: {fileID: 114035638082030702}
+  side: 4
+  sidePosition: 70
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114834623064500988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: Alpha
+  m_EditorClassIdentifier: 
+  body: {fileID: 114184654046685470}
+  side: 4
+  sidePosition: 70
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114877935610425416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGB
+  m_EditorClassIdentifier: 
+  body: {fileID: 114347722740722130}
+  side: 4
+  sidePosition: 50
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114905222772684422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RGB
+  m_EditorClassIdentifier: 
+  body: {fileID: 114909932235058954}
+  side: 4
+  sidePosition: 50
+  sideOffset: 0
+  Optional: 0
+  connection: {fileID: 0}
+  type: TextureParam
+--- !u!114 &114909932235058954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa78250248dce14783531efc2466fee, type: 3}
+  m_Name: UnityTextureOutput
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 200
+    width: 150
+    height: 150
+  nodeKnobs:
+  - {fileID: 114905222772684422}
+  - {fileID: 114490687153133766}
+  Inputs:
+  - {fileID: 114905222772684422}
+  - {fileID: 114490687153133766}
+  Outputs: []
+  m_Doc: 
+  m_Parent: {fileID: 0}
+  m_TitleBoxColor: {r: 1, g: 0, b: 0, a: 1}
+  m_MainBoxColor: {r: 1, g: 1, b: 1, a: 1}
+  m_CanDragSize: 0
+  m_DirtyID: 0
+  m_Cached: {fileID: 0}
+  m_TexMode: 1
+  m_TexWidth: 1024
+  m_TexHeight: 1024
+  m_Saturate: 1
+  m_InvertInput: 0
+  m_ClampInputUV: 0
+  m_InvertOutput: 0
+  m_InputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_InputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMin:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputGamma:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 10
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_OutputMax:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_ScalePreview:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 1
+    m_Min: 0
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Output: {fileID: 2800000, guid: d837fc65da29ecd40ba062e3d3f20391, type: 3}
+  m_TexName: Assets/TextureWang/OutputTextures/dave_normal.png

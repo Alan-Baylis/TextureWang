@@ -68,14 +68,22 @@ namespace NodeEditorFramework
 
 		protected override void ReloadTexture () 
 		{
+            //base.ReloadTexture();
 			CheckType ();
 			knobTexture = typeData.InKnobTex;
-		}
+            if (knobTexture == null)
+                Debug.LogError("knobTexture data is null " + knobTexture);
 
-		private void CheckType () 
+        }
+
+        private void CheckType () 
 		{
 			if (typeData == null || !typeData.isValid ()) 
 				typeData = ConnectionTypes.GetTypeData (type, true);
+
+            if(typeData==null)
+                Debug.LogError("type data is null "+typeData);
+            typeData.CheckTexture();
 		}
 
 		#endregion

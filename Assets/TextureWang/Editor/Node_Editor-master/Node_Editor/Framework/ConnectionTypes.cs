@@ -108,28 +108,42 @@ namespace NodeEditorFramework
 		}
 	}
 
-	public class TypeData 
-	{
-		private IConnectionTypeDeclaration declaration;
-		public Type Type { get; private set; }
-		public Color Color { get; private set; }
-		public Texture2D InKnobTex { get; private set; }
-		public Texture2D OutKnobTex { get; private set; }
+    public class TypeData
+    {
+        private IConnectionTypeDeclaration declaration;
+        public Type Type { get; private set; }
+        public Color Color { get; private set; }
+        public Texture2D InKnobTex { get; private set; }
+        public Texture2D OutKnobTex { get; private set; }
 
-		internal TypeData (IConnectionTypeDeclaration typeDecl) 
-		{
-			declaration = typeDecl;
-			Type = declaration.Type;
-			Color = declaration.Color;
+        internal TypeData(IConnectionTypeDeclaration typeDecl)
+        {
+            declaration = typeDecl;
+            Type = declaration.Type;
+            Color = declaration.Color;
+            InKnobTex = ResourceManager.GetTintedTexture(declaration.InKnobTex, Color);
+            OutKnobTex = ResourceManager.GetTintedTexture(declaration.OutKnobTex, Color);
+            if (InKnobTex == null || InKnobTex == null)
+                throw new UnityException("Invalid textures for default typeData " + declaration.Identifier + "!");
+//            Debug.LogError("init TypeData IConnectionTypeDeclaration " + typeDecl + " InKnobTex " + InKnobTex);
+        }
 
-			InKnobTex = ResourceManager.GetTintedTexture (declaration.InKnobTex, Color);
-			OutKnobTex = ResourceManager.GetTintedTexture (declaration.OutKnobTex, Color);
+        public void CheckTexture()
+        {
+            if (InKnobTex == null)
+            {
+                InKnobTex = ResourceManager.GetTintedTexture(declaration.InKnobTex, Color);
 
-			if (InKnobTex == null || InKnobTex == null)
-				throw new UnityException ("Invalid textures for default typeData " + declaration.Identifier + "!");
-		}
+            }
+            if (OutKnobTex == null)
+            {
+                OutKnobTex = ResourceManager.GetTintedTexture(declaration.OutKnobTex, Color);
+            }
 
-		internal TypeData (Type type) 
+        }
+
+
+        internal TypeData (Type type) 
 		{
 			declaration = null;
 			Type = type;
@@ -140,7 +154,8 @@ namespace NodeEditorFramework
 
 			if (InKnobTex == null || InKnobTex == null)
 				throw new UnityException ("Invalid textures for default typeData " + type.ToString () + "!");
-		}
+            Debug.LogError("init TypeData type " + type + " InKnobTex " + InKnobTex);
+        }
 
 		internal TypeData () 
 		{
@@ -152,7 +167,9 @@ namespace NodeEditorFramework
 
 			if (InKnobTex == null || InKnobTex == null)
 				throw new UnityException ("Invalid textures for default typeData!");
-		}
+
+            Debug.LogError("init TypeData type object  InKnobTex " + InKnobTex);
+        }
 
 		public bool isValid () 
 		{

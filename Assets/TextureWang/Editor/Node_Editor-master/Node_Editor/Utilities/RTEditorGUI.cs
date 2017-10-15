@@ -551,7 +551,11 @@ namespace NodeEditorFramework.Utilities
 				for (int y = 0; y < pxSize; y++) 
 					tex.SetPixel (x, y, col);
 			tex.Apply ();
-			return tex;
+            if (tex == null)
+                Debug.LogError("how can tex be null");
+//            Debug.LogError("ColorToTex After: " + tex+" size pxSize "+pxSize+" col "+col);
+            UnityEngine.Object.DontDestroyOnLoad(tex);
+            return tex;
 		}
 		
 		/// <summary>

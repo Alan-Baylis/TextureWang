@@ -70,7 +70,8 @@ namespace NodeEditorFramework
 		{
 			ReloadTexture ();
 			if (knobTexture == null)
-				throw new UnityException ("Knob texture could not be loaded!");
+				Debug.LogError("Knob texture could not be loaded!");
+            else
 			if (side != defaultSide) 
 			{ // Rotate Knob texture according to the side it's used on
 				ResourceManager.SetDefaultResourcePath (NodeEditor.editorPath + "Resources/");
@@ -108,7 +109,11 @@ namespace NodeEditorFramework
 		/// </summary>
 		protected virtual void ReloadTexture () 
 		{
+            Debug.LogError("ReloadTexture "+knobTexture );
 			knobTexture = RTEditorGUI.ColorToTex (1, Color.red);
+            Debug.LogError("ReloadTexture After: " + knobTexture);
+            if (knobTexture==null)
+                Debug.LogError("how can knob be null");
 		}
 
 		#endregion

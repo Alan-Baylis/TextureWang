@@ -44,7 +44,16 @@ namespace NodeEditorFramework
 
         #region General
 
-        public virtual void OpenPreview()
+	    public void OnEnable()
+	    {
+            hideFlags = HideFlags.HideAndDontSave;
+        }
+	    public void OnDestroy()
+	    {
+            Debug.LogError(" node destroyed "+this+" id "+GetID);
+	    }
+
+	    public virtual void OpenPreview()
 	    {
 	        
 	    }

@@ -8,6 +8,8 @@ using System.Security.Policy;
 using NodeEditorFramework;
 using NodeEditorFramework.Utilities;
 using UnityEditor.Graphs;
+using UnityEditor.Rendering;
+using UnityEditor.SceneManagement;
 using UnityEditor.TreeViewExamples;
 
 namespace NodeEditorFramework
@@ -19,7 +21,9 @@ namespace NodeEditorFramework
         int m_Height = 1024;
         private NodeEditorWindow m_Parent;
         private string m_Path= "Assets/TextureWang/OutputTextures";
-        
+        public bool m_CreateUnityTex=true;
+        public bool m_CreateUnityMaterial = true;
+        public bool m_LoadTestCubeScene = true;
         public static void Init(NodeEditorWindow _inst)
         {
             
@@ -57,11 +61,19 @@ namespace NodeEditorFramework
             m_Height = EditorGUILayout.IntField(m_Height);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Separator();
+            m_CreateUnityTex = EditorGUILayout.Toggle("Create UnityTextureOutput nodes and textures", m_CreateUnityTex);
+            m_LoadTestCubeScene = EditorGUILayout.Toggle("Throw Away current Scene and load test cube", m_LoadTestCubeScene);
+            GUI.enabled = m_CreateUnityTex;
+            m_CreateUnityMaterial = EditorGUILayout.Toggle("Create new material with new textures", m_CreateUnityMaterial);
+            
+
+
             m_Path = EditorGUILayout.TextField(m_Path);
             if (GUILayout.Button(new GUIContent("Browse Output Path", "Path to Output Textures to")))
             {
                 m_Path = EditorUtility.SaveFilePanelInProject("Save Node Canvas", "", "png", "", m_Path);
             }
+            GUI.enabled = true;
             EditorGUILayout.Separator();
 
 
@@ -75,12 +87,33 @@ namespace NodeEditorFramework
             if (GUILayout.Button("Create"))
             {
                 m_Parent.NewNodeCanvas(m_Width,m_Height);
+                if (m_CreateUnityTex)
+                {
+                    if(m_LoadTestCubeScene)
+                        EditorSceneManager.OpenScene("Assets/TextureWang/Scenes/testcube.unity");
 
-                float yOffset = 200;
-                MakeTextureNodeAndTexture("_albedo",new Vector2(0,0));
-                MakeTextureNodeAndTexture("_normal", new Vector2(0, 1*yOffset));
-                MakeTextureNodeAndTexture("_height", new Vector2(0, 2*yOffset));
-                MakeTextureNodeAndTexture("_MetalAndRoughness", new Vector2(0, 3*yOffset));
+                    float yOffset = 200;
+                    var albedo = MakeTextureNodeAndTexture("_albedo", new Vector2(0, 0));
+                    var norms = MakeTextureNodeAndTexture("_normal", new Vector2(0, 1*yOffset), true);
+
+                    var height = MakeTextureNodeAndTexture("_height", new Vector2(0, 2*yOffset));
+                    var metal = MakeTextureNodeAndTexture("_MetalAndRoughness", new Vector2(0, 3*yOffset));
+                    var occ = MakeTextureNodeAndTexture("_occlusion", new Vector2(0, 3*yOffset));
+                    if (m_CreateUnityMaterial)
+                    {
+                        var m = new Material(Shader.Find("Standard"));
+                        m.mainTexture = albedo;
+                        m.SetTexture("_BumpMap", norms);
+                        m.SetTexture("_ParallaxMap", height);
+                        m.SetTexture("_MetallicGlossMap", metal);
+                        m.SetTexture("_OcclusionMap", occ);
+                        AssetDatabase.CreateAsset(m, m_Path.Replace(".png", "_material.mat"));
+
+                        var mr = FindObjectOfType<MeshRenderer>();
+                        if (mr != null)
+                            mr.material = m;
+                    }
+                }
 
 
                 this.Close();
@@ -89,11 +122,21 @@ namespace NodeEditorFramework
             GUILayout.EndHorizontal();
         }
 
-        private void MakeTextureNodeAndTexture(string texName,Vector2 _pos)
+        private Texture2D MakeTextureNodeAndTexture(string texName, Vector2 _pos, bool _isNorm = false)
         {
             string albedo = MakePNG(m_Path, texName);
+            if (_isNorm)
+            {
+                AssetDatabase.Refresh();
+                TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(albedo);
+                importer.textureType = TextureImporterType.NormalMap;
+
+            }
+
             AssetDatabase.ImportAsset(albedo, ImportAssetOptions.ForceSynchronousImport);
             Texture2D albedoTexture = (Texture2D) AssetDatabase.LoadAssetAtPath(albedo, typeof (Texture2D));
+
+
 
             var n = Node.Create("UnityTextureOutput", _pos);
             UnityTextureOutput uto = n as UnityTextureOutput;
@@ -102,6 +145,7 @@ namespace NodeEditorFramework
                 uto.m_Output = albedoTexture;
                 uto.m_TexName = albedo;
             }
+            return albedoTexture;
         }
     }
     public class StartTextureWangPopup : EditorWindow
@@ -356,7 +400,10 @@ namespace NodeEditorFramework
 
 		private void OnEnable () 
 		{
-			tempSessionPath = Path.GetDirectoryName (AssetDatabase.GetAssetPath (MonoScript.FromScriptableObject (this)));
+            Debug.Log(" tempSessionPath FromScriptableObject:" + MonoScript.FromScriptableObject(this));
+            Debug.Log(" tempSessionPath GetAssetPath(FromScriptableObject):" + AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this)));
+            
+            tempSessionPath = Path.GetDirectoryName (AssetDatabase.GetAssetPath (MonoScript.FromScriptableObject (this)));
 			LoadCache ();
 
 	#if UNITY_EDITOR
@@ -608,13 +655,17 @@ namespace NodeEditorFramework
 
 		private void SaveCache () 
 		{
-			string canvasName = mainNodeCanvas.name;
-			EditorPrefs.SetString ("NodeEditorLastSession", canvasName);
-			NodeEditorSaveManager.SaveNodeCanvas (tempSessionPath + "/LastSession.asset", false, mainNodeCanvas, mainEditorState);
-			mainNodeCanvas.name = canvasName;
+		    if (mainNodeCanvas.nodes.Count != 0)
+		    {
+		        string canvasName = mainNodeCanvas.name;
+		        EditorPrefs.SetString("NodeEditorLastSession", canvasName);
+		        NodeEditorSaveManager.SaveNodeCanvas(tempSessionPath + "/LastSession.asset", false, mainNodeCanvas,
+		            mainEditorState);
+		        mainNodeCanvas.name = canvasName;
 
-			AssetDatabase.SaveAssets ();
-			AssetDatabase.Refresh ();
+		        AssetDatabase.SaveAssets();
+		        AssetDatabase.Refresh();
+		    }
 		}
 
 		private void LoadCache () 

@@ -34,8 +34,11 @@ namespace NodeEditorFramework
 					if (attr == null || !attr.hide)
 					{
 						Node node = ScriptableObject.CreateInstance (type.Name) as Node; // Create a 'raw' instance (not setup using the appropriate Create function)
-						node = node.Create (Vector2.zero); // From that, call the appropriate Create Method to init the previously 'raw' instance
+                        
+                        node = node.Create (Vector2.zero); // From that, call the appropriate Create Method to init the previously 'raw' instance
 						nodes.Add (node, new NodeData (attr == null? node.name : attr.contextText));
+                        node.hideFlags = HideFlags.HideAndDontSave;
+//                        Debug.LogError("add node "+node);
 					}
 				}
 			}
@@ -56,7 +59,32 @@ namespace NodeEditorFramework
 		public static Node getDefaultNode (string nodeID)
 		{
 //            Debug.Log(" getDefaultNode "+nodeID);
-			return nodes.Keys.Single<Node> ((Node node) => node.GetID == nodeID);
+			var ret= nodes.Keys.Single<Node> ((Node node) => node.GetID == nodeID);
+		    foreach (var x in nodes.Keys)
+		    {
+		        if (x == null)
+		        {
+		            Debug.LogError(" x is null "+x+" but has id "+x.GetID);
+		        }
+		        else
+		        {
+//                    Debug.LogError(" x is not null " + x + " has id " + x.GetID);
+                }
+		    }
+
+		    if (ret == null)
+		    {
+		        foreach (var x in nodes.Keys)
+		        {
+		            Debug.Log("Cant find ID "+nodeID+" but found "+x.GetID);
+		            if (x.GetID == nodeID)
+		            {
+                        Debug.LogError("Cant find ID BUT FOUND IT ANYWAY USING FOREACH!!!" + nodeID + " but found " + x.GetID+" x "+x);
+                        return x;
+		            }
+		        }
+		    }
+		    return ret;
 		}
 
 		/// <summary>

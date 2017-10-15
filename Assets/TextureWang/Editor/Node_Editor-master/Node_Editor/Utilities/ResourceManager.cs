@@ -98,7 +98,8 @@ namespace NodeEditorFramework.Utilities
 			}
 			// Else, load up the texture and store it in memory
 			Texture2D tex = LoadResource<Texture2D> (texPath);
-			AddTextureToMemory (texPath, tex);
+		    UnityEngine.Object.DontDestroyOnLoad(tex);
+            AddTextureToMemory (texPath, tex);
 			return tex;
 		}
 
@@ -117,7 +118,8 @@ namespace NodeEditorFramework.Utilities
 				tintedTexture = NodeEditorFramework.Utilities.RTEditorGUI.Tint (tintedTexture, col);
 				AddTextureToMemory (texPath, tintedTexture, texMod); // Register texture for re-use
 			}
-			return tintedTexture;
+            UnityEngine.Object.DontDestroyOnLoad(tintedTexture);
+            return tintedTexture;
 		}
 		
 		/// <summary>
