@@ -1,3 +1,4 @@
+#if POO
 using System.Collections.Generic;
 using System.Reflection;
 using NodeEditorFramework;
@@ -113,3 +114,4 @@ public class GroupNode : Node
         return true;
     }
 }
+#endif

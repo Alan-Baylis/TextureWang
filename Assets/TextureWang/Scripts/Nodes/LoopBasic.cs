@@ -65,21 +65,18 @@ public class LoopBasic : Node
     public override bool AllowRecursion { get { return true; } }
 
     private int m_Loops;
-    public override void InputChanged()
-    {
-        //Debug.LogError(" m_LoopCount set to 0");
-        //m_Loops = 0;
-    }
+/* //miked
     public override void OnClearCalculation()
     {
 //        Debug.LogError(" OnClearCalculation  m_Loops set to 0");
 
         m_Loops = 0;
     }
-
+*/
 
     public void SetDirty(Node n)
     {
+/* //miked
         n.m_DirtyID = Node.ms_GlobalDirtyID;
         foreach (var x in n.Outputs)
         {
@@ -93,6 +90,7 @@ public class LoopBasic : Node
                     SetDirty(c.body);
             }
         }
+*/
     }
 
     private TextureParam m_Temp;
@@ -161,7 +159,7 @@ public class LoopBasic : Node
         {
             if (Outputs[2] != null)
             {
-                Node.ms_GlobalDirtyID++;
+//miked                Node.ms_GlobalDirtyID++;
                 SetDirty(this);
                 calculated = true; //so the descendant can calculate that uses output 0
                 foreach (var c in Outputs[2].connections)
@@ -176,7 +174,7 @@ public class LoopBasic : Node
             }
             if (Outputs[0] != null)
             {
-                Node.ms_GlobalDirtyID++;
+//miked                Node.ms_GlobalDirtyID++;
                 SetDirty(this);
                 calculated = true; //so the descendant can calculate that uses output 0
                 foreach (var c in Outputs[0].connections)

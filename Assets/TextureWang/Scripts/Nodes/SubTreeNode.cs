@@ -87,7 +87,7 @@ public class SubTreeNode : TextureNode
 
             string NodeCanvasPath = AssetDatabase.GUIDToAssetPath(m_CanvasGuid);
 
-            m_SubCanvas = NodeEditorSaveManager.LoadNodeCanvas(NodeCanvasPath);
+            m_SubCanvas = NodeEditorSaveManager.LoadNodeCanvas(NodeCanvasPath,false); 
             m_WasCloned = true;
 
         }
@@ -96,7 +96,7 @@ public class SubTreeNode : TextureNode
         {
             if (!m_WasCloned)
             {
-                NodeEditorSaveManager.CreateWorkingCopy(ref m_SubCanvas, false);
+                NodeEditorSaveManager.CreateWorkingCopy(m_SubCanvas, false);//miked remove ref
                 m_WasCloned = true;
             }
             
@@ -128,7 +128,7 @@ public class SubTreeNode : TextureNode
                 while (needsOutput.Count > Outputs.Count)
                 {
                     //                    Debug.Log(" create input "+Inputs.Count);
-                    CreateOutput("Texture" + Outputs.Count+" "+ needsOutput[needsOutput.Count - 1].m_TexName, needsOutput[needsOutput.Count - 1].Inputs[0].connection.type, NodeSide.Right, 50 + Outputs.Count * 20);
+                    CreateOutput("Texture" + Outputs.Count+" "+ needsOutput[needsOutput.Count - 1].m_TexName, needsOutput[needsOutput.Count - 1].Inputs[0].connection.typeID, NodeSide.Right, 50 + Outputs.Count * 20);
                 }
             }
             if(needsOutput.Count>0)
@@ -143,7 +143,7 @@ public class SubTreeNode : TextureNode
                 {
                     string name = needsInput[index].name;
                     //                    Debug.Log(" create input "+Inputs.Count);
-                    CreateInput(name, needsInput[index].type, NodeSide.Left, 30 + Inputs.Count*20);
+                    CreateInput(name, needsInput[index].typeID, NodeSide.Left, 30 + Inputs.Count*20);
                 }
 
                 return false;
@@ -152,12 +152,12 @@ public class SubTreeNode : TextureNode
         }
         return true;
     }
-
+/* //miked
     public override void OnLoadCanvas()
     {
         FixupForSubCanvas();
     }
-
+*/
     protected internal override void DrawConnections()
     {
         base.DrawConnections();
@@ -214,7 +214,7 @@ public class SubTreeNode : TextureNode
                             {
                                 workList.Add(n);
                                 n.calculated = false;
-                                n.Inputs[i].ApplyConnection(Inputs[count].connection,false);
+                                n.Inputs[i].ApplyConnection(Inputs[count].connection);//miked,false);
                                 needsRemoval.Add(n.Inputs[i]);
                             }
                             count++;
@@ -224,7 +224,7 @@ public class SubTreeNode : TextureNode
             }
 
 
-            NodeEditor.RecalculateAllAnd(m_SubCanvas, workList);
+//miked            NodeEditor.RecalculateAllAnd(m_SubCanvas, workList);
             int countOut = 0;
             foreach (Node n in m_SubCanvas.nodes)
             {
@@ -244,10 +244,12 @@ public class SubTreeNode : TextureNode
                     break;
 
             }
+/* //miked
             foreach (var x in needsRemoval)
             {
                 x.RemoveConnection(false);
             }
+*/
             CreateCachedTextureIcon();
             //m_Cached = m_Param.GetHWSourceTexture();
             

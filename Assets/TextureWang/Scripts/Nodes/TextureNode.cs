@@ -39,6 +39,7 @@ public abstract class TextureNode : Node
     private bool m_ShowLevels;
     private bool m_ShowNames;
 
+
     public void AddRefreshWindow(EditorWindow _w)
     {
         if (m_Refresh == null)
@@ -147,8 +148,8 @@ public abstract class TextureNode : Node
     }
     protected override void InitBase()
     {
-        m_TexWidth = NodeEditor.curNodeCanvas.m_TexWidth;
-        m_TexHeight = NodeEditor.curNodeCanvas.m_TexHeight;
+        m_TexWidth = 1024;//miked NodeEditor.curNodeCanvas.m_TexWidth;
+        m_TexHeight = 1024; //miked NodeEditor.curNodeCanvas.m_TexHeight;
         m_Param = new TextureParam(m_TexWidth, m_TexHeight);
         base.InitBase();
 
@@ -197,8 +198,8 @@ public abstract class TextureNode : Node
         //draw the texture in the dragable node box
 
         if (m_Cached != null)
-            GUI.DrawTexture(new Rect(2, 3, m_NodeWidth - 4, m_NodeHeight - 14), m_Cached,
-                NodeEditor.curNodeCanvas.scaleMode);//ScaleMode.StretchToFill);
+            GUI.DrawTexture(new Rect(2, 3, m_NodeWidth - 4, m_NodeHeight - 14), m_Cached, ScaleMode.StretchToFill);
+//miked                NodeEditor.curNodeCanvas.scaleMode);//ScaleMode.StretchToFill);
 
         //            GUILayout.Label(m_Cached);
     }
@@ -334,10 +335,12 @@ public abstract class TextureNode : Node
 #endif
 
     }
-    public override void OpenPreview()
+
+    public void OpenPreview()
     {
         PreviewTextureWindow.Init(this);
     }
+
     public void CreateCachedTextureIcon()
     {
         m_Cached = CreateTextureIcon(1024);

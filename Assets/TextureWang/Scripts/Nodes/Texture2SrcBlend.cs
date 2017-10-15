@@ -17,7 +17,7 @@ public class Texture2SrcBlend : Texture2MathOp
         node.name = "2SrcBlend";
         node.CreateInputOutputs();
         node.m_OpType=MathOp.SrcBlend;
-        node.m_Doc ="Add second texture to first using first textures brightness as a blend value, multiplied by user setting";
+//miked        node.m_Doc ="Add second texture to first using first textures brightness as a blend value, multiplied by user setting";
         return node;
     }
 

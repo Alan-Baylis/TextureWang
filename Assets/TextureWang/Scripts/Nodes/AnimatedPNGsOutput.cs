@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using NodeEditorFramework;
+using NodeEditorFramework.Standard;
 using NodeEditorFramework.Utilities;
 using UnityEditor;
 using UnityEngine;
@@ -118,7 +119,7 @@ public class AnimatedPNGsOutput : TextureNode
                 //for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                 float t = m_StartAnimatedValue + step*_frame;
                 {
-                    m_AnimatedValue.m_Value.Set(t);
+                    m_AnimatedValue.value = t;//m_Value.Set(t);
                     NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                     if (m_Param != null && m_Param.m_Destination != null)
@@ -136,9 +137,9 @@ public class AnimatedPNGsOutput : TextureNode
     {
         base.DrawNodePropertyEditor();
 
-        m_StartAnimatedValue = RTEditorGUI.SliderLabel("Start Animated Value ", m_StartAnimatedValue, -10, 10);
-        m_EndAnimatedValue = RTEditorGUI.SliderLabel("End Animated Value ", m_EndAnimatedValue, -10, 10);
-        m_FrameCount=(int)RTEditorGUI.SliderLabel("Frame Count ", m_FrameCount, 1, 64);
+        m_StartAnimatedValue = RTEditorGUI.Slider("Start Animated Value ", m_StartAnimatedValue, -10, 10);
+        m_EndAnimatedValue = RTEditorGUI.Slider("End Animated Value ", m_EndAnimatedValue, -10, 10);
+        m_FrameCount=(int)RTEditorGUI.Slider("Frame Count ", m_FrameCount, 1, 64);
 
         if (GUILayout.Button("Choose OutputPath"))
         {
@@ -167,7 +168,7 @@ public class AnimatedPNGsOutput : TextureNode
                     float step = (m_EndAnimatedValue - m_StartAnimatedValue) / m_FrameCount;
                     for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                     {
-                        m_AnimatedValue.m_Value.Set(t);
+                        m_AnimatedValue.value=t;//.Set(t);
                         NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                         if (m_Param != null && m_Param.m_Destination != null)
@@ -200,7 +201,7 @@ public class AnimatedPNGsOutput : TextureNode
                     float step = (m_EndAnimatedValue - m_StartAnimatedValue)/m_FrameCount;
                     for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                     {
-                        m_AnimatedValue.m_Value.Set(t);
+                        m_AnimatedValue.value = t;//m_Value.Set(t);
                         NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                         if (m_Param != null && m_Param.m_Destination != null)

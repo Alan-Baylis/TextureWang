@@ -123,11 +123,11 @@ public struct FloatRemap
         if (m_ReplaceWithInput && m_Replacement == null)
         {
             m_Replacement = _node.CreateInput(_label, "Float");
-            (m_Replacement as NodeInput).Optional = true;
+//miked            (m_Replacement as NodeInput).Optional = true;
         }
         if (!m_ReplaceWithInput && m_Replacement != null)
         {
-            _node.RemoveInput((m_Replacement as NodeInput));
+//miked            _node.RemoveInput((m_Replacement as NodeInput));
             m_Replacement = null;
         }
         //        GUI.enabled = m_ReplaceWithInput;

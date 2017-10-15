@@ -42,7 +42,7 @@ public class UnityTextureOutput : TextureNode
 
     public override void DrawNodePropertyEditor() 
 	{
-        m_TitleBoxColor = Color.green;
+//miked        m_TitleBoxColor = Color.green;
 #if UNITY_EDITOR
         m_Output =(Texture2D) EditorGUI.ObjectField(new Rect(0, 300, 300, 300), m_Output, typeof(Texture2D),false);
         m_TexName = (string)GUILayout.TextField(m_TexName);
