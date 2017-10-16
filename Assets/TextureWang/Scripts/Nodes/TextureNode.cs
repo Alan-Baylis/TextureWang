@@ -335,6 +335,10 @@ public abstract class TextureNode : Node
 #endif
 
     }
+    public virtual void OnLoadCanvas()
+    {
+        
+    }
 
     public void OpenPreview()
     {

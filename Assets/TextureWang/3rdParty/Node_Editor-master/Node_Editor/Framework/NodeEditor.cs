@@ -74,7 +74,7 @@ namespace NodeEditorFramework
 			// Run fetching algorithms searching the script assemblies for Custom Nodes / Connection Types / NodeCanvas Types
 			ConnectionTypes.FetchTypes ();
 			NodeTypes.FetchNodes ();
-			NodeCanvasManager.GetAllCanvasTypes();
+			NodeCanvasManager.GetAllCanvasTypes(); 
 
 			// Setup Callback system
 			NodeEditorCallbacks.SetupReceivers ();

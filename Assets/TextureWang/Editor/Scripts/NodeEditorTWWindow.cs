@@ -272,9 +272,10 @@ namespace NodeEditorFramework
             _editor.minSize = new Vector2 (600, 400);
             
             NodeEditor.ClientRepaints += _editor.Repaint;
-	//miked		NodeEditor.initiated = NodeEditor.InitiationError = false;
+            
+            //miked		NodeEditor.initiated = NodeEditor.InitiationError = false;
 
-			iconTexture = ResourceManager.LoadTexture (EditorGUIUtility.isProSkin? "Textures/Icon_Dark.png" : "Textures/Icon_Light.png");
+            iconTexture = ResourceManager.LoadTexture (EditorGUIUtility.isProSkin? "Textures/Icon_Dark.png" : "Textures/Icon_Light.png");
 			_editor.titleContent = new GUIContent ("Texture Wang Nodes", iconTexture);
             return _editor;
         }
@@ -420,7 +421,7 @@ namespace NodeEditorFramework
             }
         }
 
-        
+        [EventHandlerAttribute(EventType.DragUpdated, 90)] // Priority over hundred to make it call after the GUI
         [EventHandlerAttribute(EventType.DragPerform, 90)] // Priority over hundred to make it call after the GUI
         private static void HandleDragAndDrop(NodeEditorInputInfo inputInfo)
         {
@@ -471,7 +472,7 @@ namespace NodeEditorFramework
                         }
 
 
-                        //node.OnLoadCanvas();
+                        node.OnLoadCanvas();
 
                     }
                     else
@@ -479,7 +480,7 @@ namespace NodeEditorFramework
                         Node node = Node.Create(srcItem.m_NodeID, NodeEditor.ScreenToCanvasSpace(inputInfo.inputPos));
                     }
                     inputInfo.inputEvent.Use();
-                    //                isAccepted = true;
+                    
                 }
                 else if (inputInfo.inputEvent.type == EventType.DragPerform &&
                          DragAndDrop.objectReferences.Length > 0 && (DragAndDrop.objectReferences[0] is NodeCanvas))
@@ -502,8 +503,8 @@ namespace NodeEditorFramework
                     }
                     inputInfo.inputEvent.Use();
 
-                    //miked node.OnLoadCanvas();
-                    //                isAccepted = true;
+                    node.OnLoadCanvas();
+                    
                 }
             }
         }
@@ -573,10 +574,24 @@ namespace NodeEditorFramework
 
 		    }
         }
+
+        void OnLoadCanvas(NodeCanvas _canvas)
+        {
+            foreach (var n in _canvas.nodes)
+            {
+                if (n is TextureNode)
+                {
+                    (n as TextureNode).OnLoadCanvas();
+                }
+            }
+        }
+
         private void OnEnable()
         {
             _editor = this;
             NodeEditor.checkInit(false);
+
+            NodeEditorCallbacks.OnLoadCanvas += OnLoadCanvas;
 
             NodeEditor.ClientRepaints -= Repaint;
             NodeEditor.ClientRepaints += Repaint;
@@ -606,7 +621,10 @@ namespace NodeEditorFramework
             m_NodeSelectionWindow = MultiColumnWindow.GetWindow(this);
 
             m_InspectorWindow = NodeInspectorWindow.Init(this);
+            NodeEditor.ClientRepaints += m_InspectorWindow.Repaint;
             StartTextureWangPopup.Init(this);
+
+            
 
         }
 
@@ -622,6 +640,7 @@ namespace NodeEditorFramework
             AssetDatabase.Refresh();
 
             NodeEditor.ClientRepaints -= Repaint;
+            NodeEditor.ClientRepaints -= m_InspectorWindow.Repaint;
 
             EditorLoadingControl.justLeftPlayMode -= NormalReInit;
             EditorLoadingControl.justOpenedNewScene -= NormalReInit;

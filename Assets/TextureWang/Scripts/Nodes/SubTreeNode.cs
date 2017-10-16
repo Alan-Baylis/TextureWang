@@ -104,13 +104,14 @@ public class SubTreeNode : TextureNode
             List<UnityTextureOutput> needsOutput = new List<UnityTextureOutput>();
             foreach (Node n in m_SubCanvas.nodes)
             {
-                if (n is UnityTextureOutput && n.Inputs[0].connection!=null)
-                {
-                    needsOutput.Add(n as UnityTextureOutput);
-                    
-                }
+
                 if (n.Inputs.Count > 0)
                 {
+                    if (n is UnityTextureOutput && n.Inputs[0].connection != null)
+                    {
+                        needsOutput.Add(n as UnityTextureOutput);
+
+                    }
                     for (int i = 0; i < n.Inputs.Count; i++)
                     {
                         if (n.Inputs[i].connection == null)
@@ -152,12 +153,12 @@ public class SubTreeNode : TextureNode
         }
         return true;
     }
-/* //miked
+
     public override void OnLoadCanvas()
     {
         FixupForSubCanvas();
     }
-*/
+
     protected internal override void DrawConnections()
     {
         base.DrawConnections();
