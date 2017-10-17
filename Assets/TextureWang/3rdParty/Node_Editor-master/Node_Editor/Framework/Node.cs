@@ -577,8 +577,19 @@ namespace NodeEditorFramework
 			startRecursiveSearchNode = null;
 		}
 
-		#endregion
+        #endregion
 
-		#endregion
-	}
+        #endregion
+
+        public void RemoveInput(NodeInput _in)
+        {
+            if (_in.connection != null)
+                _in.connection.connections.Remove(_in);
+
+            Inputs.Remove(_in);
+            nodeKnobs.Remove(_in);
+            DestroyImmediate(_in);
+        }
+
+    }
 }

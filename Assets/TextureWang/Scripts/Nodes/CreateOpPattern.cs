@@ -25,8 +25,8 @@ public class CreateOpPattern : CreateOp
         node.name = "CreateOpPattern";
         node.CreateOutput("Texture", "TextureParam", NodeSide.Right, 50);
 
-        node.m_Value1 = new FloatRemap(4.0f);
-        node.m_Value2 = new FloatRemap(4.0f);
+        node.m_Value1 = new FloatRemap(4.0f,0,10);
+        node.m_Value2 = new FloatRemap(4.0f,0,10);
         node.m_Value5 = new FloatRemap(0,-Mathf.PI,Mathf.PI);
         node.m_Value6 = new FloatRemap(0, -Mathf.PI, Mathf.PI);
         

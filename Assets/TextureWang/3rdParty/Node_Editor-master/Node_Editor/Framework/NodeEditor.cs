@@ -343,12 +343,30 @@ namespace NodeEditorFramework
 			}
 			StartCalculation ();
 		}
-		
-		/// <summary>
-		/// Recalculate from this node. 
-		/// Usually does not need to be called manually
-		/// </summary>
-		public static void RecalculateFrom (Node node) 
+        /// <summary>
+        /// Recalculate from every Input Node and the list provided
+        /// </summary>
+        public static void RecalculateAllAndWorkList(NodeCanvas nodeCanvas, List<Node> _workList)
+        {
+            workList = new List<Node>();
+            foreach (var x in _workList)
+                workList.Add(x);
+            foreach (Node node in nodeCanvas.nodes)
+            {
+                if (node.isInput())
+                { // Add all Inputs
+                    node.ClearCalculation();
+                    workList.Add(node);
+                }
+            }
+            StartCalculation();
+        }
+
+        /// <summary>
+        /// Recalculate from this node. 
+        /// Usually does not need to be called manually
+        /// </summary>
+        public static void RecalculateFrom (Node node) 
 		{
 			node.ClearCalculation ();
 			workList = new List<Node> { node };

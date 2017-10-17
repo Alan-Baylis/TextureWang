@@ -185,7 +185,7 @@ namespace NodeEditorFramework
 		/// <summary>
 		/// Applies a connection between the passed NodeOutput and this NodeInput. 'CanApplyConnection' has to be checked before to avoid interferences!
 		/// </summary>
-		public void ApplyConnection (NodeOutput output)
+		public void ApplyConnection (NodeOutput output,bool _recalc=true)
 		{
 			if (output == null) 
 				return;
@@ -198,12 +198,15 @@ namespace NodeEditorFramework
 			connection = output;
 			output.connections.Add (this);
 
-			if (!output.body.calculated)
-				NodeEditor.RecalculateFrom (output.body);
-			else
-				NodeEditor.RecalculateFrom (body);
-			
-			output.body.OnAddOutputConnection (output);
+		    if (_recalc)
+		    {
+		        if (!output.body.calculated)
+		            NodeEditor.RecalculateFrom(output.body);
+		        else
+		            NodeEditor.RecalculateFrom(body);
+		    }
+
+		    output.body.OnAddOutputConnection (output);
 			body.OnAddInputConnection (this);
 			NodeEditorCallbacks.IssueOnAddConnection (this);
 		}
@@ -211,7 +214,7 @@ namespace NodeEditorFramework
 		/// <summary>
 		/// Removes the connection from this NodeInput
 		/// </summary>
-		public void RemoveConnection ()
+		public void RemoveConnection (bool _recalc = true)
 		{
 			if (connection == null)
 				return;
@@ -219,8 +222,8 @@ namespace NodeEditorFramework
 			NodeEditorCallbacks.IssueOnRemoveConnection (this);
 			connection.connections.Remove (this);
 			connection = null;
-
-			NodeEditor.RecalculateFrom (body);
+            if (_recalc)
+                NodeEditor.RecalculateFrom (body);
 		}
 
 

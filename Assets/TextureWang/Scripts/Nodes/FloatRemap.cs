@@ -127,7 +127,7 @@ public struct FloatRemap
         }
         if (!m_ReplaceWithInput && m_Replacement != null)
         {
-//miked            _node.RemoveInput((m_Replacement as NodeInput));
+            _node.RemoveInput((m_Replacement as NodeInput));
             m_Replacement = null;
         }
         //        GUI.enabled = m_ReplaceWithInput;

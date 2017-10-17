@@ -215,7 +215,7 @@ public class SubTreeNode : TextureNode
                             {
                                 workList.Add(n);
                                 n.calculated = false;
-                                n.Inputs[i].ApplyConnection(Inputs[count].connection);//miked,false);
+                                n.Inputs[i].ApplyConnection(Inputs[count].connection,false);
                                 needsRemoval.Add(n.Inputs[i]);
                             }
                             count++;
@@ -225,7 +225,7 @@ public class SubTreeNode : TextureNode
             }
 
 
-//miked            NodeEditor.RecalculateAllAnd(m_SubCanvas, workList);
+            NodeEditor.RecalculateAllAndWorkList(m_SubCanvas,workList);
             int countOut = 0;
             foreach (Node n in m_SubCanvas.nodes)
             {
@@ -245,12 +245,12 @@ public class SubTreeNode : TextureNode
                     break;
 
             }
-/* //miked
+
             foreach (var x in needsRemoval)
             {
                 x.RemoveConnection(false);
             }
-*/
+
             CreateCachedTextureIcon();
             //m_Cached = m_Param.GetHWSourceTexture();
             
