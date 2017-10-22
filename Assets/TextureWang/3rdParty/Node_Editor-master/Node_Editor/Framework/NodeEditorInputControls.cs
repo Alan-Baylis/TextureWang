@@ -121,8 +121,23 @@ namespace NodeEditorFramework
 				inputInfo.inputEvent.delta = Vector2.zero;
 			}
 		}
+        static void MoveChildren(ref Dictionary<Node, int> _dic, Node _n, Vector2 _delta)
+        {
+            foreach (var input in _n.Inputs)
+            {
+                Node cn = input.connection.body;
+                if (!_dic.ContainsKey(cn))
+                {
 
-		[EventHandlerAttribute (EventType.MouseDrag)]
+                    cn.rect.position += _delta;
+                    NodeEditorCallbacks.IssueOnMoveNode(cn);
+                    MoveChildren(ref _dic, cn, _delta);
+                    _dic[cn] = 1;
+                }
+            }
+
+        }
+        [EventHandlerAttribute (EventType.MouseDrag)]
 		private static void HandleNodeDragging (NodeEditorInputInfo inputInfo) 
 		{
 			NodeEditorState state = inputInfo.editorState;
@@ -131,8 +146,16 @@ namespace NodeEditorFramework
 				if (state.selectedNode != null && GUIUtility.hotControl == 0)
 				{ // Calculate new position for the dragged object
 					state.dragOffset = inputInfo.inputPos-state.dragStart;
-					state.selectedNode.rect.position = state.dragPos + state.dragOffset*state.zoom;
-					NodeEditorCallbacks.IssueOnMoveNode (state.selectedNode);
+                    Vector2 delta= ( state.dragPos + state.dragOffset * state.zoom)- state.selectedNode.rect.position;
+                    state.selectedNode.rect.position = state.dragPos + state.dragOffset*state.zoom;
+                    if (inputInfo.inputEvent.alt)
+                    {
+                        Dictionary<Node, int> d = new Dictionary<Node, int>();
+                        d[state.selectedNode] = 1;
+
+                        MoveChildren(ref d, state.selectedNode, delta);
+                    }
+                    NodeEditorCallbacks.IssueOnMoveNode (state.selectedNode);
 					NodeEditor.RepaintClients ();
 				} 
 				else

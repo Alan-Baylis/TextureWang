@@ -59,7 +59,8 @@ public class ImprovedPerlinNoise
 	
 	void LoadPermTable1D()
 	{
-		if(m_permTable1D) return;
+		if(m_permTable1D!=null)
+            return;
 		
 		m_permTable1D = new Texture2D(SIZE, 1, TextureFormat.Alpha8, false, true);
 		m_permTable1D.filterMode = FilterMode.Point;
@@ -76,7 +77,8 @@ public class ImprovedPerlinNoise
 	//This is special table that has been optimesed for 3D noise. It can also be use in 4D noise for some optimisation but the 1D perm table is still needed 
 	void LoadPermTable2D()
 	{
-		if(m_permTable2D) return;
+		if(m_permTable2D!=null)
+            return;
 		
 		m_permTable2D = new Texture2D(SIZE, SIZE, TextureFormat.ARGB32, false, true);
 		m_permTable2D.filterMode = FilterMode.Point;

@@ -408,32 +408,56 @@ namespace NodeEditorFramework
 		{
 			if (node.calculated)
 				return false;
-			if ((node.descendantsCalculated () || node.isInLoop ()) && node.Calculate ())
-			{ // finished Calculating, continue with the children
-				node.calculated = true;
-				calculationCount++;
-				workList.Remove (node);
-				if (node.ContinueCalculation && calculationCount < 1000) 
-				{
-					for (int outCnt = 0; outCnt < node.Outputs.Count; outCnt++)
-					{
-						NodeOutput output = node.Outputs [outCnt];
-						if (!output.calculationBlockade)
-						{
-							for (int conCnt = 0; conCnt < output.connections.Count; conCnt++)
-								ContinueCalculation (output.connections [conCnt].body);
-						}
-					}
-				}
-				else if (calculationCount >= 1000)
-					Debug.LogError ("Stopped calculation because of suspected Recursion. Maximum calculation iteration is currently at 1000!");
-				return true;
-			}
-			else if (!workList.Contains (node)) 
-			{ // failed to calculate, add it to check later
-				workList.Add (node);
-			}
-			return false;
+            bool InputsCalculated = node.descendantsCalculated(); //MikeD
+		    if ((InputsCalculated || node.isInLoop()) && node.Calculate())
+		    {
+		        // finished Calculating, continue with the children
+		        node.calculated = true;
+		        calculationCount++;
+		        workList.Remove(node);
+		        if (node.ContinueCalculation && calculationCount < 1000)
+		        {
+		            for (int outCnt = 0; outCnt < node.Outputs.Count; outCnt++)
+		            {
+		                NodeOutput output = node.Outputs[outCnt];
+		                if (!output.calculationBlockade)
+		                {
+		                    for (int conCnt = 0; conCnt < output.connections.Count; conCnt++)
+		                        ContinueCalculation(output.connections[conCnt].body);
+		                }
+		            }
+		        }
+		        else if (calculationCount >= 1000)
+		            Debug.LogError(
+		                "Stopped calculation because of suspected Recursion. Maximum calculation iteration is currently at 1000!");
+		        return true;
+		    }
+		    else
+		    {
+		        if (!InputsCalculated)
+		        {
+		            //add inputs 
+		            foreach (NodeInput input in node.Inputs)
+		            {
+		                if (input.connection != null && !input.connection.body.calculated)
+		                {
+		                    if (!workList.Contains(input.connection.body))
+		                    {
+
+		                        workList.Add(input.connection.body);
+		                    }
+		                }
+		            }
+		        }
+		        if (!workList.Contains(node))
+		        {
+		            // failed to calculate, add it to check later
+		            workList.Add(node);
+		        }
+                if (node.AllowRecursion)
+                    return true;
+            }
+		    return false;
 		}
 		
 		#endregion

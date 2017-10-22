@@ -311,6 +311,7 @@ namespace NodeEditorFramework
 			editorState.canvas = nodeCanvas;
 			editorState.name = MainEditorStateIdentifier;
 			nodeCanvas.editorStates = new NodeEditorState[] { editorState };
+		    //NodeEditor.curEditorState = editorState;
 			#if UNITY_EDITOR
 			UnityEditor.EditorUtility.SetDirty (nodeCanvas);
 			#endif

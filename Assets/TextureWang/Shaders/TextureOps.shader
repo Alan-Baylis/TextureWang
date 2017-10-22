@@ -382,10 +382,10 @@ Shader "Hidden/TextureOps" {
 		float4 fragSrcBlend(v2f i) : SV_Target
 	{
 		float4 src = GetTextureMain4(_MainTex, i.uv);
-		float4 src2 = GetTextureMain4(_GradientTex, i.uv);
+		float4 src2 = GetTextureB4(_GradientTex, i.uv);
 
-		float alpha = src.r;
-		float4 ret = src + _Multiply.x*src2*( alpha);
+		float alpha = saturate(1- _Multiply.x*length(src.rgb));
+		float4 ret = src + src2*( alpha);
 		
 
 		ret.w = 1.0f;

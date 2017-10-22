@@ -122,7 +122,9 @@ public struct FloatRemap
 
         if (m_ReplaceWithInput && m_Replacement == null)
         {
-            m_Replacement = _node.CreateInput(_label, "Float");
+            m_Replacement = _node.FindExistingInputByName(_label);
+            if(m_Replacement == null)
+                m_Replacement = _node.CreateInput(_label, "Float");
 //miked            (m_Replacement as NodeInput).Optional = true;
         }
         if (!m_ReplaceWithInput && m_Replacement != null)

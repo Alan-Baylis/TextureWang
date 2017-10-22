@@ -3,42 +3,49 @@ using System.Collections;
 using NodeEditorFramework;
 using NodeEditorFramework.Utilities;
 
-namespace NodeEditorFramework.Standard
+[System.Serializable]
+[Node (false, "Float/Input")]
+public class InputNode : Node 
 {
-	[System.Serializable]
-	[Node (false, "Float/Input")]
-	public class InputNode : Node 
+	public const string ID = "inputNode";
+	public override string GetID { get { return ID; } }
+
+	
+    public FloatRemap m_Value;
+
+	public override Node Create (Vector2 pos) 
+	{ // This function has to be registered in Node_Editor.ContextCallback
+		InputNode node = CreateInstance <InputNode> ();
+		
+		node.name = "Input Node";
+		node.rect = new Rect (pos.x, pos.y, 200, 100);;
+		node.m_Value=new FloatRemap(1,-1,1);
+		NodeOutput.Create (node, "Value", "Float");
+
+		return node;
+	}
+    protected internal override void CopyScriptableObjects(System.Func<ScriptableObject, ScriptableObject> replaceSerializableObject)
+    {
+        TextureNode.ConnectRemapFloats(this, replaceSerializableObject);
+    }
+
+
+    protected internal override void NodeGUI () 
 	{
-		public const string ID = "inputNode";
-		public override string GetID { get { return ID; } }
+        //value = RTEditorGUI.FloatField (new GUIContent ("Value", "The input value of type float"), value);
+        GUILayout.Label("Value:" + (float)m_Value);
+        OutputKnob (0);
 
-		public float value = 1f;
+	}
 
-		public override Node Create (Vector2 pos) 
-		{
-			InputNode node = CreateInstance <InputNode> ();
+    public override void DrawNodePropertyEditor()
+    {
+        m_Value.SliderLabel(this, "Value");
 
-			node.name = "Input Node";
-			node.rect = new Rect (pos.x, pos.y, 200, 50);;
-
-			NodeOutput.Create (node, "Value", "Float");
-
-			return node;
-		}
-
-		protected internal override void NodeGUI () 
-		{
-			value = RTEditorGUI.FloatField (new GUIContent ("Value", "The input value of type float"), value);
-			OutputKnob (0);
-
-			if (GUI.changed)
-				NodeEditor.RecalculateFrom (this);
-		}
-
-		public override bool Calculate () 
-		{
-			Outputs[0].SetValue<float> (value);
-			return true;
-		}
+    }
+    public override bool Calculate () 
+	{
+		Outputs[0].SetValue<float> (m_Value);
+		return true;
 	}
 }

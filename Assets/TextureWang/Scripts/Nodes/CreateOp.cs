@@ -62,6 +62,7 @@ public abstract class CreateOp : TextureNode
         return _output.CreateRenderDestination(m_TexWidth, m_TexHeight,  TextureParam.GetRTFormat(m_TexMode == TexMode.Greyscale));
     }
 
+    public Texture2D m_debugGradient;
     public void General(float r,float g,float b,  TextureParam output, ShaderOp _shaderOp)
     {
                 System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
@@ -83,7 +84,7 @@ public abstract class CreateOp : TextureNode
             mat.SetTexture("_PermTable1D", m_perlin.GetPermutationTable1D());
             mat.SetTexture("_Gradient2D", m_perlin.GetGradient2D());
         }
-
+        m_debugGradient = m_perlin.GetGradient2D();
         RenderTexture destination = CreateRenderDestination( output);
         
         Graphics.Blit(null, destination, GetMaterial("CreateTexture"), (int)_shaderOp);

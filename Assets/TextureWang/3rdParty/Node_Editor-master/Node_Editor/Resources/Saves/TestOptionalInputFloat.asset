@@ -9,14 +9,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e0c2324a9ab1224ebe3edad393e3544, type: 3}
-  m_Name: LastSession
+  m_Name: TestOptionalInputFloat
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 114928246843118822}
+  - {fileID: 114550421182841202}
+  - {fileID: 114757958834502078}
   editorStates:
-  - {fileID: 114837764563476228}
+  - {fileID: 114847462399241918}
   livesInScene: 0
---- !u!114 &114143092183368574
+--- !u!114 &114130769263981960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caff27366054dd44a30ddb5be369acc, type: 3}
+  m_Name: RadiusX
+  m_EditorClassIdentifier: 
+  body: {fileID: 114550421182841202}
+  side: 4
+  sidePosition: 20
+  sideOffset: 0
+  connection: {fileID: 114144128136974056}
+  typeID: Float
+--- !u!114 &114144128136974056
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -25,16 +43,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42e7026d0da7df848ab67d517ac12d74, type: 3}
-  m_Name: Texture
+  m_Name: Value
   m_EditorClassIdentifier: 
-  body: {fileID: 114928246843118822}
+  body: {fileID: 114757958834502078}
   side: 2
-  sidePosition: 50
+  sidePosition: 31
   sideOffset: 0
-  connections: []
-  typeID: TextureParam
+  connections:
+  - {fileID: 114130769263981960}
+  typeID: Float
   calculationBlockade: 0
---- !u!114 &114837764563476228
+--- !u!114 &114550421182841202
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -42,37 +61,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
-  m_Name: MainEditorState
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 11400000}
-  parentEditor: {fileID: 0}
-  drawing: 1
-  selectedNode: {fileID: 114928246843118822}
-  panOffset: {x: 0, y: 0}
-  zoom: 0.8
---- !u!114 &114928246843118822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a94d995ee570da74f9684c47e3bc00ac, type: 3}
-  m_Name: CreateOpPerlin
+  m_Script: {fileID: 11500000, guid: d3ac54680cf71a146b2cecf262cb25f9, type: 3}
+  m_Name: Circle
   m_EditorClassIdentifier: 
   rect:
     serializedVersion: 2
-    x: -204.4
-    y: -163.20001
+    x: -193.5
+    y: -141
     width: 128
     height: 142
   nodeKnobs:
-  - {fileID: 114143092183368574}
-  Inputs: []
+  - {fileID: 114992542666457176}
+  - {fileID: 114130769263981960}
+  Inputs:
+  - {fileID: 114130769263981960}
   Outputs:
-  - {fileID: 114143092183368574}
+  - {fileID: 114992542666457176}
+  m_DirtyID: 0
   m_Cached: {fileID: 0}
   m_TexMode: 1
   m_TexWidth: 1024
@@ -141,13 +146,13 @@ MonoBehaviour:
     m_Mult: 1
     m_ReplaceWithInputNext: 0
     m_OpenMinMax: 0
-  m_ShaderOp: 0
+  m_ShaderOp: 8
   m_Value1:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 20
-    m_Min: 0
-    m_Max: 100
+    m_ReplaceWithInput: 1
+    m_Replacement: {fileID: 114130769263981960}
+    m_Value: 0.5
+    m_Min: -1
+    m_Max: 1
     m_Add: 0
     m_Mult: 1
     m_ReplaceWithInputNext: 0
@@ -155,14 +160,34 @@ MonoBehaviour:
   m_Value2:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
-    m_Value: 20
-    m_Min: 0
-    m_Max: 100
+    m_Value: 0
+    m_Min: -1
+    m_Max: 1
     m_Add: 0
     m_Mult: 1
     m_ReplaceWithInputNext: 0
     m_OpenMinMax: 0
   m_Value3:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0
+    m_Min: -1
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Value4:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0.5
+    m_Min: -1
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+  m_Value5:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
     m_Value: 0.5
@@ -172,32 +197,12 @@ MonoBehaviour:
     m_Mult: 1
     m_ReplaceWithInputNext: 0
     m_OpenMinMax: 0
-  m_Value4:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 0.01
-    m_Min: 0
-    m_Max: 1
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
-  m_Value5:
-    m_ReplaceWithInput: 0
-    m_Replacement: {fileID: 0}
-    m_Value: 46
-    m_Min: 0
-    m_Max: 100
-    m_Add: 0
-    m_Mult: 1
-    m_ReplaceWithInputNext: 0
-    m_OpenMinMax: 0
   m_Value6:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
-    m_Value: 46
+    m_Value: 0.1
     m_Min: 0
-    m_Max: 100
+    m_Max: 1
     m_Add: 0
     m_Mult: 1
     m_ReplaceWithInputNext: 0
@@ -205,7 +210,7 @@ MonoBehaviour:
   m_Value7:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
-    m_Value: 0.56
+    m_Value: 0.1
     m_Min: 0
     m_Max: 1
     m_Add: 0
@@ -215,7 +220,7 @@ MonoBehaviour:
   m_Value8:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
-    m_Value: 0.38
+    m_Value: 0.1
     m_Min: 0
     m_Max: 1
     m_Add: 0
@@ -237,8 +242,8 @@ MonoBehaviour:
     m_ReplaceWithInput: 0
     m_Replacement: {fileID: 0}
     m_Value: 2
-    m_Min: 1
-    m_Max: 4
+    m_Min: 0
+    m_Max: 1
     m_Add: 0
     m_Mult: 1
     m_ReplaceWithInputNext: 0
@@ -273,7 +278,77 @@ MonoBehaviour:
     m_Mult: 1
     m_ReplaceWithInputNext: 0
     m_OpenMinMax: 0
-  m_Octaves: 4
-  m_OpType: 0
-  m_Uniform: 1
-  m_Wrapping: 0
+  m_Octaves: 1
+  m_debugGradient: {fileID: 0}
+  m_OffsetX: 0
+  m_OffsetY: 0
+  m_Fill: 1
+  m_InvertFill: 0
+--- !u!114 &114757958834502078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3dd50b389073b148b5ec10e419dc073, type: 3}
+  m_Name: Input Node
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: -480.5
+    y: -152
+    width: 200
+    height: 100
+  nodeKnobs:
+  - {fileID: 114144128136974056}
+  Inputs: []
+  Outputs:
+  - {fileID: 114144128136974056}
+  m_DirtyID: 0
+  m_Value:
+    m_ReplaceWithInput: 0
+    m_Replacement: {fileID: 0}
+    m_Value: 0.16
+    m_Min: -1
+    m_Max: 1
+    m_Add: 0
+    m_Mult: 1
+    m_ReplaceWithInputNext: 0
+    m_OpenMinMax: 0
+--- !u!114 &114847462399241918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  parentEditor: {fileID: 0}
+  drawing: 1
+  selectedNode: {fileID: 114757958834502078}
+  panOffset: {x: 283, y: 12}
+  zoom: 1
+--- !u!114 &114992542666457176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e7026d0da7df848ab67d517ac12d74, type: 3}
+  m_Name: Texture
+  m_EditorClassIdentifier: 
+  body: {fileID: 114550421182841202}
+  side: 2
+  sidePosition: 50
+  sideOffset: 0
+  connections: []
+  typeID: TextureParam
+  calculationBlockade: 0

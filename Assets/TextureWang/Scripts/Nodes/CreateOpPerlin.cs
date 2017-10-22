@@ -121,7 +121,7 @@ public class CreateOpPerlin : CreateOp
         }
         if (m_Param == null)
             m_Param = new TextureParam(m_TexWidth,m_TexHeight);
-        if (m_perlin == null)
+        if (m_perlin == null||m_perlin.GetPermutationTable1D()==null || m_perlin.GetGradient2D() == null)
         {
             m_perlin = new ImprovedPerlinNoise(m_seed);
             m_perlin.LoadResourcesFor2DNoise();

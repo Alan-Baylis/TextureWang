@@ -28,6 +28,7 @@ public class ColorGradient : CreateOp
         node.name = "ColorGradient";
         
         node.CreateOutput("Texture", "TextureParam", NodeSide.Right, 50);
+        node.m_TexMode = TexMode.ColorRGB;
 
         return node;
     }

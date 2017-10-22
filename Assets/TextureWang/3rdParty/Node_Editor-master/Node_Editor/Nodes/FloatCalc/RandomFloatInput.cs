@@ -13,6 +13,10 @@ public class RandomFloatInput : Node
     public FloatRemap m_Min ;
     public FloatRemap m_Max ;
     public FloatRemap m_Seed;
+    protected internal override void CopyScriptableObjects(System.Func<ScriptableObject, ScriptableObject> replaceSerializableObject)
+    {
+        TextureNode.ConnectRemapFloats(this, replaceSerializableObject);
+    }
 
     public override Node Create (Vector2 pos) 
     { // This function has to be registered in Node_Editor.ContextCallback

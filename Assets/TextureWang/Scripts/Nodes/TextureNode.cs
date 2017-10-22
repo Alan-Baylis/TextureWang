@@ -39,6 +39,7 @@ public abstract class TextureNode : Node
     private bool m_ShowLevels;
     private bool m_ShowNames;
 
+    private static Material ms_UIMaterial;
 
     public void AddRefreshWindow(EditorWindow _w)
     {
@@ -58,17 +59,25 @@ public abstract class TextureNode : Node
     }
     protected internal override void CopyScriptableObjects(System.Func<ScriptableObject, ScriptableObject> replaceSerializableObject)
     {
-        // Get the fields of the specified class.
-        FieldInfo[] myField = this.GetType().GetFields();
+        ConnectRemapFloats(this,replaceSerializableObject);
+    }
+
+    public static void ConnectRemapFloats(Node _n,Func<ScriptableObject, ScriptableObject> replaceSerializableObject)
+    {
+// Get the fields of the specified class.
+        FieldInfo[] myField = _n.GetType().GetFields();
         foreach (var x in myField)
         {
             // if(x.FieldType is FloatRemap)
-            if (x.GetValue(this) is FloatRemap)
+            if (x.GetValue(_n) is FloatRemap)
             {
-                FloatRemap fr= (FloatRemap) x.GetValue(this); //its a struct this makes a copy
+                FloatRemap fr = (FloatRemap) x.GetValue(_n); //its a struct this makes a copy
                 //                Debug.Log(x + " " + x.FieldType + " " + x.GetType() + " " + x.ReflectedType+" fr val:"+fr.m_Value);
-
-                if (fr.m_Replacement != null)
+                if (fr.m_ReplaceWithInput && fr.m_Replacement == null)
+                {
+                    Debug.LogError(" wants to be replaced but isnt linked ");
+                }
+                else if (fr.m_Replacement != null)
                 {
                     NodeKnob knob = fr.m_Replacement;
                     NodeInput replace = replaceSerializableObject.Invoke(knob) as NodeInput;
@@ -81,11 +90,11 @@ public abstract class TextureNode : Node
                         fr.m_Replacement = null;
                     }
                 }
-                x.SetValue(this,fr); //its a god damn struct it needs to be saved back out
-
+                x.SetValue(_n, fr); //its a god damn struct it needs to be saved back out
             }
         }
     }
+
     protected internal override void DrawConnections()
     {
         CheckNodeKnobMigration();
@@ -198,7 +207,18 @@ public abstract class TextureNode : Node
         //draw the texture in the dragable node box
 
         if (m_Cached != null)
-            GUI.DrawTexture(new Rect(2, 3, m_NodeWidth - 4, m_NodeHeight - 14), m_Cached, ScaleMode.StretchToFill);
+        {
+            
+            if (Event.current.type == EventType.Repaint)
+            {
+
+                if (m_TexMode == TexMode.Greyscale)
+                    Graphics.DrawTexture(new Rect(2, 3, m_NodeWidth - 4, m_NodeHeight - 24), m_Cached,GetMaterial("UIMaterial"), m_TexMode == TexMode.Greyscale ? 0 : 1);
+                else
+                    GUI.DrawTexture(new Rect(2, 3, m_NodeWidth - 4, m_NodeHeight - 14), m_Cached, ScaleMode.StretchToFill);
+                    
+            }
+        }
 //miked                NodeEditor.curNodeCanvas.scaleMode);//ScaleMode.StretchToFill);
 
         //            GUILayout.Label(m_Cached);
@@ -234,14 +254,19 @@ public abstract class TextureNode : Node
         m_TexWidth=(int)EditorGUILayout.Slider(m_TexWidth, 1.0f, 2048.0f);
         EditorGUILayout.LabelField("TexHeight");
         m_TexHeight = (int)EditorGUILayout.Slider(m_TexHeight, 1.0f, 2048.0f);
-        EditorGUILayout.TextArea("Info: "+GetHelp());
-        
+        GUI.skin.button.wordWrap = true;
+        //EditorGUI.TextArea(new Rect(10, 10, 200, 100),"Info: " +GetHelp());
+//        Rect r=EditorGUILayout.BeginVertical(GUILayout.Height(100), GUILayout.Width(100));
+        GUILayout.TextArea("Info: " + GetHelp(), GUILayout.Height(100), GUILayout.Width(300));
+//        EditorGUILayout.EndVertical();
+
+/*
         if (m_Param!=null)
             GUILayout.Label("outParam: Width: " + m_Param.m_Width + "outParam: Height: " + m_Param.m_Height);
 
         if (m_Param != null && m_Param.m_Destination!=null)
             GUILayout.Label("HWDest: Width: " + m_Param.m_Destination.width + "HWDest: Height: " + m_Param.m_Destination.height+" fmt:"+ m_Param.m_Destination.format, EditorStyles.wordWrappedLabel);
-
+*/
         m_Saturate = GUILayout.Toggle(m_Saturate, "Clip result to 0..1");
         m_ClampInputUV = GUILayout.Toggle(m_ClampInputUV, "Clamp Input UV");
         m_InvertInput = GUILayout.Toggle(m_InvertInput, "Invert Input");
@@ -337,6 +362,7 @@ public abstract class TextureNode : Node
     }
     public virtual void OnLoadCanvas()
     {
+       
         
     }
 

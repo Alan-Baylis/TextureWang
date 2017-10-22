@@ -53,6 +53,7 @@ namespace NodeEditorFramework
 		/// </summary>
 		public static Node getDefaultNode (string nodeID)
 		{
+
 			return nodes.Keys.Single<Node> ((Node node) => node.GetID == nodeID);
 		}
 

@@ -65,18 +65,18 @@ public class LoopBasic : Node
     public override bool AllowRecursion { get { return true; } }
 
     private int m_Loops;
-/* //miked
+
     public override void OnClearCalculation()
     {
-//        Debug.LogError(" OnClearCalculation  m_Loops set to 0");
+        Debug.LogError(" OnClearCalculation  m_Loops set to 0");
 
         m_Loops = 0;
     }
-*/
+
 
     public void SetDirty(Node n)
     {
-/* //miked
+
         n.m_DirtyID = Node.ms_GlobalDirtyID;
         foreach (var x in n.Outputs)
         {
@@ -90,7 +90,7 @@ public class LoopBasic : Node
                     SetDirty(c.body);
             }
         }
-*/
+
     }
 
     private TextureParam m_Temp;
@@ -100,13 +100,13 @@ public class LoopBasic : Node
         
         if (m_Loops == 0 && (Inputs[0].connection==null || Inputs[0].connection.IsValueNull) )//!allInputsReady())
         {
-//            Debug.LogError(" m_LoopCount set to 0 input 0 is null");
+            Debug.LogError(" m_LoopCount set to 0 input 0 is null");
             m_Loops = 0;
             return false;
         }
         if (m_Loops > 0 && (Inputs[1].connection == null || Inputs[1].connection.IsValueNull))//!allInputsReady())
         {
-//            Debug.LogError(" m_LoopCount set to 1 input 1 is null");
+            Debug.LogError(" m_LoopCount set to 1 input 1 is null");
             m_Loops = 1;
             return false;
         }
@@ -159,7 +159,7 @@ public class LoopBasic : Node
         {
             if (Outputs[2] != null)
             {
-//miked                Node.ms_GlobalDirtyID++;
+                Node.ms_GlobalDirtyID++;
                 SetDirty(this);
                 calculated = true; //so the descendant can calculate that uses output 0
                 foreach (var c in Outputs[2].connections)
@@ -174,7 +174,7 @@ public class LoopBasic : Node
             }
             if (Outputs[0] != null)
             {
-//miked                Node.ms_GlobalDirtyID++;
+                Node.ms_GlobalDirtyID++;
                 SetDirty(this);
                 calculated = true; //so the descendant can calculate that uses output 0
                 foreach (var c in Outputs[0].connections)

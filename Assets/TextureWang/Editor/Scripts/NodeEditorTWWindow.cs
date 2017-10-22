@@ -4,239 +4,18 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System.Security.Policy;
 using NodeEditorFramework;
 using NodeEditorFramework.Utilities;
 using UnityEditor.Graphs;
-using UnityEditor.Rendering;
-using UnityEditor.SceneManagement;
 using UnityEditor.TreeViewExamples;
+using Node = NodeEditorFramework.Node;
 
-namespace NodeEditorFramework
+
+namespace TextureWang
 {
 
-    public class NewTextureWangPopup : EditorWindow
-    {
-        int m_Width = 1024;
-        int m_Height = 1024;
-        private NodeEditorTWWindow m_Parent;
-        private string m_Path= "Assets/TextureWang/OutputTextures";
-        public bool m_CreateUnityTex=true;
-        public bool m_CreateUnityMaterial = true;
-        public bool m_LoadTestCubeScene = true;
-        public static void Init(NodeEditorTWWindow _inst)
-        {
-            
-            NewTextureWangPopup window = ScriptableObject.CreateInstance<NewTextureWangPopup>();
-            window.m_Parent = _inst;
-            window.position = new Rect(_inst.canvasWindowRect.x+ _inst.canvasWindowRect.width*0.5f, _inst.canvasWindowRect.y + _inst.canvasWindowRect.height * 0.5f, 350, 250);
-            window.titleContent=new GUIContent("New TextureWang Canvas");
-            window.ShowUtility();
-        }
-        public string MakePNG(string path,string _append)
-        {
-            string name = path.Replace(".png", _append + ".png");
-            var tex = new Texture2D(m_Width, m_Height, TextureParam.ms_TexFormat, false);
-            byte[] bytes = tex.EncodeToPNG();
 
-            if (!string.IsNullOrEmpty(name))
-            {
-                File.WriteAllBytes(name, bytes);
-            }
-            return name;
-        }
-        void OnGUI()
-        {
-            
-
-            EditorGUILayout.LabelField("\n Warning: Erases Current Canvas", EditorStyles.wordWrappedLabel);
-            EditorGUILayout.Separator();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Width");
-            m_Width = EditorGUILayout.IntField(m_Width);
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Height");
-            m_Height = EditorGUILayout.IntField(m_Height);
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Separator();
-            m_CreateUnityTex = EditorGUILayout.Toggle("Create UnityTextureOutput nodes and textures", m_CreateUnityTex);
-            m_LoadTestCubeScene = EditorGUILayout.Toggle("Throw Away current Scene and load test cube", m_LoadTestCubeScene);
-            GUI.enabled = m_CreateUnityTex;
-            m_CreateUnityMaterial = EditorGUILayout.Toggle("Create new material with new textures", m_CreateUnityMaterial);
-            
-
-
-            m_Path = EditorGUILayout.TextField(m_Path);
-            if (GUILayout.Button(new GUIContent("Browse Output Path", "Path to Output Textures to")))
-            {
-                m_Path = EditorUtility.SaveFilePanelInProject("Save Node Canvas", "", "png", "", m_Path);
-            }
-            GUI.enabled = true;
-            EditorGUILayout.Separator();
-
-
-
-            //            m_Height = EditorGUILayout.IntField(m_Height);
-            //            m_Noise = EditorGUILayout.FloatField(m_Noise);
-
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Cancel"))
-                this.Close();
-            if (GUILayout.Button("Create"))
-            {
-                m_Parent.NewNodeCanvas(m_Width,m_Height);
-                if (m_CreateUnityTex)
-                {
-                    if(m_LoadTestCubeScene)
-                        EditorSceneManager.OpenScene("Assets/TextureWang/Scenes/testcube.unity");
-
-                    float yOffset = 200;
-                    var albedo = MakeTextureNodeAndTexture("_albedo", new Vector2(0, 0));
-                    var norms = MakeTextureNodeAndTexture("_normal", new Vector2(0, 1*yOffset), true);
-
-                    var height = MakeTextureNodeAndTexture("_height", new Vector2(0, 2*yOffset));
-                    var metal = MakeTextureNodeAndTexture("_MetalAndRoughness", new Vector2(0, 3*yOffset));
-                    var occ = MakeTextureNodeAndTexture("_occlusion", new Vector2(0, 3*yOffset));
-                    if (m_CreateUnityMaterial)
-                    {
-                        var m = new Material(Shader.Find("Standard"));
-                        m.mainTexture = albedo;
-                        m.SetTexture("_BumpMap", norms);
-                        m.SetTexture("_ParallaxMap", height);
-                        m.SetTexture("_MetallicGlossMap", metal);
-                        m.SetTexture("_OcclusionMap", occ);
-                        AssetDatabase.CreateAsset(m, m_Path.Replace(".png", "_material.mat"));
-
-                        var mr = FindObjectOfType<MeshRenderer>();
-                        if (mr != null)
-                            mr.material = m;
-                    }
-                }
-
-
-                this.Close();
-
-            }
-            GUILayout.EndHorizontal();
-        }
-
-        private Texture2D MakeTextureNodeAndTexture(string texName, Vector2 _pos, bool _isNorm = false)
-        {
-            string albedo = MakePNG(m_Path, texName);
-            if (_isNorm)
-            {
-                AssetDatabase.Refresh();
-                TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(albedo);
-                importer.textureType = TextureImporterType.NormalMap;
-
-            }
-
-            AssetDatabase.ImportAsset(albedo, ImportAssetOptions.ForceSynchronousImport);
-            Texture2D albedoTexture = (Texture2D) AssetDatabase.LoadAssetAtPath(albedo, typeof (Texture2D));
-
-
-
-            var n = Node.Create("UnityTextureOutput", _pos);
-            UnityTextureOutput uto = n as UnityTextureOutput;
-            if (uto != null)
-            {
-                uto.m_Output = albedoTexture;
-                uto.m_TexName = albedo;
-            }
-            return albedoTexture;
-        }
-    }
-    public class StartTextureWangPopup : EditorWindow
-    {
-        int m_Width = 1024;
-        int m_Height = 1024;
-        private NodeEditorTWWindow m_Parent;
-        private WWW www;
-
-        public static void Init(NodeEditorTWWindow _inst)
-        {
-            
-            StartTextureWangPopup window = ScriptableObject.CreateInstance<StartTextureWangPopup>();
-            
-            window.m_Parent = _inst;
-            window.position = new Rect(_inst.canvasWindowRect.x + _inst.canvasWindowRect.width * 0.5f, _inst.canvasWindowRect.y + _inst.canvasWindowRect.height * 0.5f, 350, 250);
-            window.titleContent = new GUIContent("Welcome To TextureWang");
-            window.www = new WWW("http://ec2-52-3-137-47.compute-1.amazonaws.com/demo/");
-            window.ShowUtility();
-        }
-
-        private int m_Count;
-        void OnGUI()
-        {
-            Focus();
-            string str ="\n Welcome to TextureWang \n \n If you find it useful please consider becoming a patreon \nto help support future features \n ";
-            if (www.isDone)
-            {
-                try
-                {
-
-
-                    Version v = new Version(www.text);
-
-                    str += "\n\nLatest version available " + v + " your version: " + NodeEditorTWWindow.m_Version;
-
-                    if (v.CompareTo(NodeEditorTWWindow.m_Version) > 0)
-                    {
-                        str += "New version available " + v + " yours: " + NodeEditorTWWindow.m_Version;
-                        EditorGUILayout.LabelField(str, EditorStyles.wordWrappedLabel);
-                        if (GUILayout.Button("Go get New version "))
-                        {
-                            this.Close();
-                            Application.OpenURL("https://github.com/dizzy2003/TextureWang");
-                        }
-                        if (GUILayout.Button("https://www.patreon.com/TextureWang"))
-                        {
-                            this.Close(); 
-                            Application.OpenURL("https://www.patreon.com/TextureWang");
-                        }
-                        if (GUILayout.Button("Ignore new version"))
-                        {
-
-                            this.Close();
-                        }
-                        return;
-
-                    }
-                }
-                catch (Exception)
-                {
-
-                    
-                }
-
-            }
-            else
-            {
-                str += "\n\nConnecting to Server";
-                m_Count++;
-
-                for (int i = 0; i < (m_Count>>4) % 10; i++) 
-                    str += ".";
-            }
-
-
-
-            EditorGUILayout.LabelField(str, EditorStyles.wordWrappedLabel);
-            if (GUILayout.Button("https://www.patreon.com/TextureWang"))
-            {
-                this.Close();
-                Application.OpenURL("https://www.patreon.com/TextureWang");
-            }
-                if (GUILayout.Button("OK"))
-            {
-                
-                this.Close();
-            }
-            
-        }
-    }
+  
     public class NodeEditorTWWindow : EditorWindow , ITreeDataProvider
     {
         public static Version m_Version = new Version(0,1,1,2);
@@ -267,10 +46,12 @@ namespace NodeEditorFramework
         [MenuItem ("Window/TextureWang")]
 		public static NodeEditorTWWindow OpenNodeEditor()
         {
+
+            _editor = GetWindow<NodeEditorTWWindow>();//new Rect(0,0,1280,768),false,"TextureWang");
+            _editor.minSize = new Vector2 (800, 600);
             
-            _editor = GetWindow<NodeEditorTWWindow> ();
-            _editor.minSize = new Vector2 (600, 400);
-            
+
+
             NodeEditor.ClientRepaints += _editor.Repaint;
             
             //miked		NodeEditor.initiated = NodeEditor.InitiationError = false;
@@ -510,6 +291,20 @@ namespace NodeEditorFramework
         }
         private void OnGUI () 
 		{
+/*
+            if (NodeEditor.curEditorState == null)
+            {
+                Debug.Log("OnGUI::TWWindow has no editor state " + NodeEditor.curEditorState+"actual editor state "+ canvasCache.editorState);
+            }
+            else if (NodeEditor.curEditorState.selectedNode == null)
+            {
+                Debug.Log("OnGUI::TWWindow has no Selected Node " + NodeEditor.curEditorState);
+            }
+            else
+            {
+                Debug.Log("OnGUI:: Selected Node " + NodeEditor.curEditorState.selectedNode);
+            }
+*/
             // Initiation
             NodeEditor.checkInit(true);
             if (NodeEditor.InitiationError)
@@ -543,13 +338,13 @@ namespace NodeEditorFramework
             }
 
 
-            /*
+            
             // Draw Side Window
-			sideWindowWidth = Math.Min(600, Math.Max(200, (int)(position.width / 5)));
-			GUILayout.BeginArea(sideWindowRect, GUI.skin.box);
-			DrawSideWindow();
-			GUILayout.EndArea();
-            */
+			//sideWindowWidth = Math.Min(600, Math.Max(200, (int)(position.width / 5)));
+			//GUILayout.BeginArea(sideWindowRect, GUI.skin.box);
+			//DrawSideWindow();
+			//GUILayout.EndArea();
+            
 
             NodeEditorGUI.EndNodeGUI();
 //            if (Event.current.type == EventType.Repaint)
@@ -588,6 +383,7 @@ namespace NodeEditorFramework
 
         private void OnEnable()
         {
+            Debug.Log("NodeEditorTWWindow enabled");
             _editor = this;
             NodeEditor.checkInit(false);
 
@@ -614,6 +410,7 @@ namespace NodeEditorFramework
             }
             else
             {
+                Debug.LogError("UNKNOWN asset path " + assetPath);
                 canvasCache = new NodeEditorUserCache(); //path);
             }
             canvasCache.SetupCacheEvents();
@@ -624,7 +421,9 @@ namespace NodeEditorFramework
             NodeEditor.ClientRepaints += m_InspectorWindow.Repaint;
             StartTextureWangPopup.Init(this);
 
-            
+            m_InspectorWindow.m_Source = this;
+
+
 
         }
 
@@ -749,19 +548,28 @@ namespace NodeEditorFramework
                         ShowNotification(new GUIContent("You should select an asset inside your project folder!"));
                 }
                 else
+                {
+                    NodeEditor.curEditorState = null;
                     canvasCache.LoadNodeCanvas(path);
+                    canvasCache.NewEditorState();
+                    
+                }
             }
 
             if (GUILayout.Button(new GUIContent("New TextureWang", "Create a new TextureWang Canvas")))
             {
                 NewTextureWangPopup.Init(this);
             }
-				
 
-			if (GUILayout.Button (new GUIContent ("Recalculate All", "Initiates complete recalculate. Usually does not need to be triggered manually.")))
-				NodeEditor.RecalculateAll (canvasCache.nodeCanvas);
 
-			if (GUILayout.Button ("Force Re-Init"))
+            if (GUILayout.Button(new GUIContent("Recalculate All",
+                    "Initiates complete recalculate. Usually does not need to be triggered manually.")))
+            {
+                NodeEditor.RecalculateAll(canvasCache.nodeCanvas);
+                GUI.changed = false;
+            }
+
+            if (GUILayout.Button ("Force Re-Init"))
 				NodeEditor.ReInit (true);
 
 			NodeEditorGUI.knobSize = EditorGUILayout.IntSlider (new GUIContent ("Handle Size", "The size of the Node Input/Output handles"), NodeEditorGUI.knobSize, 12, 20);
@@ -777,16 +585,29 @@ namespace NodeEditorFramework
                 //                EditorGUILayout.LabelField("width: " + mainNodeCanvas.m_TexWidth);
                 //                EditorGUILayout.LabelField("height: " + mainNodeCanvas.m_TexHeight);
             }
-            
-            if (NodeEditor.curEditorState!=null && NodeEditor.curEditorState.selectedNode != null)
+/*
+            if (NodeEditor.curEditorState == null)
+            {
+                Debug.Log("TWWindow has no editor state " + NodeEditor.curEditorState);
+            }
+            else if (NodeEditor.curEditorState.selectedNode == null)
+            {
+                Debug.Log("TWWindow has no Selected Node " + NodeEditor.curEditorState);
+            }
+            else
+            {
+                Debug.Log(" Selected Node " + NodeEditor.curEditorState.selectedNode);
+            }
+*/            
+            if (canvasCache.editorState != null && canvasCache.editorState.selectedNode != null)
                 // if (Event.current.type != EventType.Ignore)
-                {
-                    RTEditorGUI.Seperator();
-                    GUILayout.Label(NodeEditor.curEditorState.selectedNode.name);
-                    RTEditorGUI.Seperator();
-                    NodeEditor.curEditorState.selectedNode.DrawNodePropertyEditor();
-                    if (GUI.changed)
-                        NodeEditor.RecalculateFrom(PriorLoop(NodeEditor.curEditorState.selectedNode));
+            {
+                RTEditorGUI.Seperator();
+                GUILayout.Label(canvasCache.editorState.selectedNode.name);
+                RTEditorGUI.Seperator();
+                canvasCache.editorState.selectedNode.DrawNodePropertyEditor();
+                if (GUI.changed)
+                    NodeEditor.RecalculateFrom(PriorLoop(canvasCache.editorState.selectedNode));
 
             }
             
@@ -846,5 +667,32 @@ namespace NodeEditorFramework
         {
             canvasCache.LoadSceneNodeCanvas((string)canvas);
         }
+
+        /*
+				    if (e.alt)
+				    {
+                        Dictionary<Node, int> d = new Dictionary<Node, int>();
+                        d[curEditorState.selectedNode] = 1;
+
+				        MoveChildren(ref d, curEditorState.selectedNode, delta);
+				    }
+        */
+        static void MoveChildren(ref Dictionary<Node, int> _dic, Node _n, Vector2 _delta)
+        {
+            foreach (var input in _n.Inputs)
+            {
+                Node cn = input.connection.body;
+                if (!_dic.ContainsKey(cn))
+                {
+
+                    cn.rect.position += _delta;
+                    NodeEditorCallbacks.IssueOnMoveNode(cn);
+                    MoveChildren(ref _dic, cn, _delta);
+                    _dic[cn] = 1;
+                }
+            }
+
+        }
+
     }
 }

@@ -247,6 +247,7 @@ namespace NodeEditorFramework
 			{ // Select focussed Node
 				unfocusControlsForState = state;
 				state.selectedNode = state.focusedNode;
+                Debug.Log("Set Selected node "+ state.selectedNode);
 				NodeEditor.RepaintClients ();
 			#if UNITY_EDITOR
 				if (state.selectedNode != null)

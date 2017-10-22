@@ -156,6 +156,7 @@ public class SubTreeNode : TextureNode
 
     public override void OnLoadCanvas()
     {
+        base.OnLoadCanvas();
         FixupForSubCanvas();
     }
 

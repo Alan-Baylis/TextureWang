@@ -1,8 +1,8 @@
-﻿using NodeEditorFramework.Standard;
+﻿
 using UnityEditor;
 using UnityEngine;
 
-namespace NodeEditorFramework
+namespace TextureWang
 {
     
     public class PreviewTextureWindow : EditorWindow

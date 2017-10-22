@@ -5,8 +5,13 @@ using UnityEngine;
 [Node (false, "TwoInput/SrcBlend")]
 public class Texture2SrcBlend : Texture2MathOp
 {
+    private const string m_Help = "Add second texture to first using first textures brightness as a inverse blend value for tex2 (tex2 is used when tex1 is black), multiplied by user setting";
+    public override string GetHelp() { return m_Help; }
+
     public const string ID = "Texture2SrcBlend";
     public override string GetID { get { return ID; } }
+
+    public FloatRemap m_Value1;
 
     public override Node Create (Vector2 pos) 
     {
@@ -17,7 +22,7 @@ public class Texture2SrcBlend : Texture2MathOp
         node.name = "2SrcBlend";
         node.CreateInputOutputs();
         node.m_OpType=MathOp.SrcBlend;
-//miked        node.m_Doc ="Add second texture to first using first textures brightness as a blend value, multiplied by user setting";
+        node.m_Value = new FloatRemap(1f, 0, 10);
         return node;
     }
 

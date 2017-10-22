@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using NodeEditorFramework;
 using NodeEditorFramework.Standard;
+using TextureWang;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 
 public class NodeInspectorWindow : EditorWindow
 {
-
-
-    
-    public Texture2D m_tex;
-    private NodeEditorTWWindow m_Source;
+    public NodeEditorTWWindow m_Source;
     private Vector2 m_ScrollPos;
+    public float rnd;
     void OnDestroy()
     {
 
     }
 
+    void Awake()
+    {
+        rnd = Random.value;
+        Debug.Log("awake "+rnd);
+    }
  
     public static NodeInspectorWindow Init(NodeEditorTWWindow _src)
     {
@@ -35,6 +38,10 @@ public class NodeInspectorWindow : EditorWindow
 
     }
 
+    void OnEnable()
+    {
+        Debug.Log("InspectorWindow enabled");
+    }
 
     void OnGUI()
     {

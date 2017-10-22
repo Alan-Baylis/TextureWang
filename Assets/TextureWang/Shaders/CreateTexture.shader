@@ -153,6 +153,7 @@ Shader "Hidden/CreateTexture" {
 			amp *= _Gain;
 			repeatPeriod *= 2.0f;
 		}
+//		sum = tex2D(_Gradient2D, float2(p.x, 0)).r;
 		return saturate(sum *0.5f + 0.5f);
 	}
 

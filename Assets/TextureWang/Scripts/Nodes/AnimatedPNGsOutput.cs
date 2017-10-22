@@ -119,7 +119,7 @@ public class AnimatedPNGsOutput : TextureNode
                 //for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                 float t = m_StartAnimatedValue + step*_frame;
                 {
-                    m_AnimatedValue.value = t;//m_Value.Set(t);
+                    m_AnimatedValue.m_Value.Set(t);
                     NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                     if (m_Param != null && m_Param.m_Destination != null)
@@ -168,7 +168,7 @@ public class AnimatedPNGsOutput : TextureNode
                     float step = (m_EndAnimatedValue - m_StartAnimatedValue) / m_FrameCount;
                     for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                     {
-                        m_AnimatedValue.value=t;//.Set(t);
+                        m_AnimatedValue.m_Value.Set(t);
                         NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                         if (m_Param != null && m_Param.m_Destination != null)
@@ -201,7 +201,7 @@ public class AnimatedPNGsOutput : TextureNode
                     float step = (m_EndAnimatedValue - m_StartAnimatedValue)/m_FrameCount;
                     for (float t = m_StartAnimatedValue; t < m_EndAnimatedValue; t += step)
                     {
-                        m_AnimatedValue.value = t;//m_Value.Set(t);
+                        m_AnimatedValue.m_Value.Set(t);
                         NodeEditor.RecalculateFrom(m_AnimatedValue);
 
                         if (m_Param != null && m_Param.m_Destination != null)

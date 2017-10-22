@@ -123,7 +123,7 @@ public static class Docker
 
     private static Vector2 GetFakeMousePosition( EditorWindow wnd, DockPosition position ) {
         Vector2 mousePosition = Vector2.zero;
-        Debug.Log(" wnd.position.size " + wnd.position.size+" pos: "+wnd.position.position);
+        //Debug.Log(" wnd.position.size " + wnd.position.size+" pos: "+wnd.position.position);
         // The 20 is required to make the docking work.
         // Smaller values might not work when faking the mouse position.
         switch ( position ) {

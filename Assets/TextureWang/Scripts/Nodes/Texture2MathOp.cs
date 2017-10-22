@@ -78,7 +78,9 @@ public abstract class Texture2MathOp : TextureNode
         base.DrawNodePropertyEditor();
         m_OpType = (MathOp)UnityEditor.EditorGUILayout.EnumPopup(new GUIContent("Type", "The type of calculation performed on Input 1"), m_OpType, GUILayout.MaxWidth(200));
         if(m_OpType == MathOp.Blend)
-            m_Value.SliderLabel(this,"");//, -1.0f, 1.0f);//,new GUIContent("Red", "Float"), m_R);
+            m_Value.SliderLabel(this,"Blend:");//, -1.0f, 1.0f);//,new GUIContent("Red", "Float"), m_R);
+        if (m_OpType == MathOp.SrcBlend)
+            m_Value.SliderLabel(this, "AlphaMult:");//, -1.0f, 1.0f);//,new GUIContent("Red", "Float"), m_R);
 
         PostDrawNodePropertyEditor();
 
